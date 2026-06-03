@@ -157,25 +157,25 @@ sequenceDiagram
 
 ```mermaid
 graph TD
-    subgraph Frontend [React.js Frontend (Vite)]
-        UI[Glassmorphism UI]
-        Map[Leaflet Interactive Map]
-        Voice[Web Speech API]
+    subgraph Frontend ["React.js Frontend (Vite)"]
+        UI["Glassmorphism UI"]
+        Map["Leaflet Interactive Map"]
+        Voice["Web Speech API"]
     end
 
-    subgraph Backend [Firebase]
-        Auth[인증 관리 (Auth)]
-        FS[실시간 데이터베이스 (Firestore)]
+    subgraph Backend ["Firebase"]
+        Auth["인증 관리 (Auth)"]
+        FS["실시간 데이터베이스 (Firestore)"]
     end
 
-    subgraph AI_Data_Pipeline [AI Data Pipeline (Python)]
-        Crawler[RSS Feed Crawler]
-        OpenAI[의도 파악 GPT-4o-mini]
-        Gemini[문서 요약 Gemini 1.5 Pro]
+    subgraph AI_Data_Pipeline ["AI Data Pipeline (Python)"]
+        Crawler["RSS Feed Crawler"]
+        OpenAI["의도 파악 GPT-4o-mini"]
+        Gemini["문서 요약 Gemini 1.5 Pro"]
     end
 
-    subgraph Public_APIs [10+ Public APIs]
-        GovData[정부24, 국토교통부, 환경공단 등]
+    subgraph Public_APIs ["10+ Public APIs"]
+        GovData["정부24, 국토교통부, 환경공단 등"]
     end
 
     UI <--> |사용자 정보 및 알림 조회| FS
