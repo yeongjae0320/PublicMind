@@ -1,16 +1,107 @@
-# React + Vite
+# PublicMind (퍼블릭마인드) - 초개인화 공공데이터 통합 플랫폼
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 1. 프로젝트 개요 (Project Overview)
+- **서비스명**: PublicMind (퍼블릭마인드)
+- **한 줄 소개**: AI와 10여 개 공공데이터 API를 융합하여, 사용자 프로필에 맞는 정책과 혜택을 스스로 찾아주는 초개인화 공공데이터 슈퍼앱
+- **개발 형태**: 1인 풀스택 개인 프로젝트 (기획, UI/UX 디자인, 프론트엔드, 백엔드, 데이터 파이프라인 설계)
+- **핵심 목표**: 흩어져 있는 공공 데이터를 하나의 모던한 웹 플랫폼으로 통합하고, 인공지능을 활용해 사용자에게 꼭 필요한 정보만 선별하여 제공하는 것.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 2. 기획 배경 및 사용자 페인 포인트 (Background & Pain Points)
 
-## React Compiler
+### 사용자가 겪는 문제점 (Pain Points)
+1. **공공데이터의 파편화**: 정부24, 복지로, 국토교통부, 외교부 등 정보를 얻기 위해 방문해야 하는 사이트가 너무 많고 흩어져 있음.
+2. **맞춤형 정보의 부재**: 수많은 정책과 지원금 중 '나'의 조건(나이, 소득, 가구 형태 등)에 맞는 혜택을 찾기 위해 일일이 공문을 읽고 자격 요건을 해석해야 함.
+3. **복잡한 접근성과 딱딱한 UI/UX**: 기존 공공기관 사이트 특유의 복잡한 메뉴 구조와 어려운 행정 용어로 인해 디지털 소외 계층 및 일반 유저의 피로도가 높음.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 해결 방안 (Solution)
+- 10개 이상의 공공기관 API를 단일 앱으로 통합하여 원스톱 서비스 제공.
+- AI 언어모델(LLM)을 백그라운드 크롤러에 도입하여, 줄글로 된 정책 데이터를 구조화하고 유저 프로필과 매칭하는 '초개인화 알림 엔진' 구축.
+- Glassmorphism 디자인과 3D 커버플로우 등 최신 웹 UI/UX 트렌드를 반영하여 직관적이고 아름다운 사용자 경험 제공.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 3. 핵심 기술 및 AI 도입 (Core Technologies & AI Integration)
+
+### 3.1. AI 기반 의도 파악 및 보이스 라우팅 (OpenAI GPT-4o-mini)
+- **사용처**: 통합 AI 어시스턴트 및 메인 홈 음성 검색 모달
+- **적용 방식**: 
+  - 사용자가 마이크를 통해 자연어로 질문(예: "요즘 전세 사기 피하는 법 알려줘")을 하면, Web Speech API가 이를 텍스트로 변환.
+  - 변환된 텍스트를 OpenAI API로 전송, 프롬프트 엔지니어링을 통해 사용자의 의도를 분석.
+  - 분석 결과에 따라 복지, 부동산, 교통 등 8개의 주요 도메인 중 가장 적합한 페이지로 자동 이동(Routing) 처리.
+
+### 3.2. 초개인화 정책 크롤링 파이프라인 (Python + Google Gemini API)
+- **사용처**: 사용자의 마이페이지 맞춤 조건(나이, 직업, 가구 형태 등)에 따른 실시간 정책 푸시 알림
+- **왜 필요한가**: 공공기관의 RSS 피드나 정책 데이터는 대상자나 조건이 복잡한 줄글(자연어)로 작성되어 있어, 단순 키워드 검색이나 정규식(Regex) 매칭으로는 정확한 타겟팅이 불가능함.
+- **적용 방식 (Architecture)**:
+  1. Python 기반의 크롤링 스크립트가 주기적으로 대한민국 정책 RSS 데이터를 수집.
+  2. 수집된 정책의 본문 텍스트를 Gemini API에 전달하여 수혜 대상(예: '청년', '소상공인', '임산부' 등)과 지역 카테고리를 JSON 배열 형태로 정확하게 추출(구조화).
+  3. 구조화된 메타데이터를 Firebase Firestore에 실시간으로 업로드.
+  4. 프론트엔드(React)에서 유저의 프로필 데이터와 Firestore의 정책 데이터를 교차 검증하여, 조건이 완벽히 일치하는 유저에게만 맞춤형 알림 제공.
+
+---
+
+## 4. 서비스 주요 기능 및 도메인 (Service Features)
+
+| 서비스 도메인 | 주요 기능 및 특징 | 활용 데이터 / API |
+|---|---|---|
+| **통합 AI 어시스턴트** | 전체 공공데이터를 기반으로 자연어 질문에 답변 및 기능 추천 | OpenAI API, 내부 목업 DB |
+| **복지 / 지원금 조회** | 연령, 소득 수준에 따른 맞춤형 지원금 조회 및 상세 공문 제공 | 정부 보조금24 API 데이터 구조화 |
+| **부동산 / 입지 분석** | 예산 및 라이프스타일에 따른 맞춤형 동네 추천 및 전월세 시세 확인 | 국토교통부 실거래가, 상권 정보 API |
+| **글로벌 재난/안전** | 전 세계 여행 위험 경보, 특별여행주의보 실시간 지도(Leaflet) 시각화 | 외교부 해외안전여행 API |
+| **보건 / 의료 내비게이션** | 내 주변 심야 공공약국, 1등급 병원, 건강검진 기관 위치 제공 | 공공데이터포털 전국 약국/병원 API |
+| **실시간 도로 / CCTV** | 전국 고속도로 실시간 소통 현황 및 구간별 CCTV 스트리밍 제공 | 국가교통정보센터(ITS) API |
+| **환경 / 재난 알리미** | 내 주변 실시간 미세먼지 수치 및 비상시 대피소(지진, 민방위) 위치 안내 | 한국환경공단 에어코리아 API |
+| **교육 / 보육 솔루션** | 전국 어린이집 현황 및 학군 분석 데이터 제공 | 영유아 보육 API, 학교 알리미 API |
+| **문화 / 여가 가이드** | 주말 무료 축제, 국공립 캠핑장, 체육시설 예약 현황 안내 | 문화체육관광부 공연/축제 API |
+
+---
+
+## 5. 정보 구조도 (Information Architecture)
+
+- **Home (메인보드)**
+  - 3D 커버플로우 메뉴 (8대 도메인 퀵 접근)
+  - 플로팅 보이스 라우팅 모달
+- **통합 AI 어시스턴트 (AiAssistant)**
+  - 대화형 챗봇 인터페이스 및 추천 질문 칩
+- **각 도메인별 대시보드 (DomainLayout)**
+  - 좌측 LNB (세부 메뉴 네비게이션)
+  - KPI 요약 카드 및 필터링 옵션
+  - 지도 시각화 (MapContainer) 및 리스트 뷰
+- **마이페이지 (MyPage)**
+  - 개인 프로필 및 맞춤 조건(나이, 소득, 직업) 설정
+  - AI 크롤러 연동 '맞춤 알림' 수신함
+  - 관심 스크랩 및 커뮤니티 활동 내역
+- **인증 (Auth)**
+  - 로그인 및 회원가입 (Firebase Auth)
+
+---
+
+## 6. 사용된 기술 스택 및 오픈소스 (Tech Stack)
+
+### Frontend
+- **Framework**: React.js (Vite)
+- **Routing**: React Router DOM
+- **Styling**: Vanilla CSS (Glassmorphism, CSS Animations, CSS Variables 적용)
+- **Map Visualization**: Leaflet, React-Leaflet
+- **Icons**: Lucide React
+- **Markdown**: React-Markdown (AI 답변 렌더링)
+
+### Backend & Database
+- **BaaS**: Firebase (Authentication, Firestore)
+- **Cloud Functions**: Firebase Cloud Functions (예정/확장성 고려)
+
+### AI & Data Pipeline (Python)
+- **Language**: Python 3.8+
+- **Crawler Libraries**: feedparser, requests, beautifulsoup4
+- **AI Models**: Google Generative AI (Gemini 1.5 Pro) SDK, OpenAI API
+- **Infrastructure**: dotenv, firebase-admin
+
+---
+
+## 7. UI/UX 디자인 철학 (Design Principles)
+
+1. **유리 질감(Glassmorphism)과 시각적 계층화**: 복잡한 표나 텍스트 위주의 공공데이터를 반투명한 유리 패널 위에 얹어, 정보의 우선순위를 명확히 하고 세련된 느낌을 부여.
+2. **동적 피드백과 마이크로 인터랙션**: 버튼 호버, 카드 클릭, 데이터 로딩 스켈레톤(Skeleton) 등 사용자 액션에 대해 즉각적이고 부드러운 애니메이션을 제공하여 앱이 '살아있다'는 감각을 전달.
+3. **콘텍스트 유지**: 풀스크린 맵 시각화 시, 주요 필터나 상세 정보를 플로팅(Floating) 카드 형태로 띄워 사용자가 지도의 맥락을 잃지 않고 데이터를 탐색할 수 있도록 설계.
