@@ -1,107 +1,127 @@
 # PublicMind (퍼블릭마인드) - 초개인화 공공데이터 통합 플랫폼
 
-## 1. 프로젝트 개요 (Project Overview)
-- **서비스명**: PublicMind (퍼블릭마인드)
-- **한 줄 소개**: AI와 10여 개 공공데이터 API를 융합하여, 사용자 프로필에 맞는 정책과 혜택을 스스로 찾아주는 초개인화 공공데이터 슈퍼앱
-- **개발 형태**: 1인 풀스택 개인 프로젝트 (기획, UI/UX 디자인, 프론트엔드, 백엔드, 데이터 파이프라인 설계)
-- **핵심 목표**: 흩어져 있는 공공 데이터를 하나의 모던한 웹 플랫폼으로 통합하고, 인공지능을 활용해 사용자에게 꼭 필요한 정보만 선별하여 제공하는 것.
+대한민국 전역에 흩어져 있는 공공데이터(복지, 재난, 교통, 보건 등 10여 개 분야)를 단일 웹 플랫폼으로 통합하고, **인공지능(LLM)을 활용해 사용자 프로필 기반 맞춤형 알림과 음성 의도 파악 라우팅을 제공하는 지능형 슈퍼앱**입니다.
+
+## 1. 프로젝트 기획 및 설계 배경
+
+### 1.1 사용자 페인 포인트 (Pain Points)
+- **정보의 파편화와 높은 탐색 비용**: 청년 지원금은 '복지로', 실시간 도로는 '국토교통부', 재난 경보는 '국민재난안전포털' 등 정보가 분산되어 있어 접근성이 매우 떨어짐.
+- **비구조화된 정책 데이터**: 정부의 정책 공문이나 RSS 피드는 복잡한 자연어(줄글)로 작성되어 있어, 사용자가 본인에게 혜택이 적용되는지 파악하기 위해 긴 글을 직접 독해해야 함.
+- **불편한 UX/UI**: 기존 공공기관 서비스는 메뉴 뎁스(Depth)가 깊고 모바일 최적화가 부족하며 검색 기능이 제한적임.
+
+### 1.2 서비스 해결 방안 (Solution)
+- **통합 대시보드 구축**: 10개 이상의 공공 OpenAPI를 하나의 뷰에서 직관적으로 소비할 수 있는 반응형 하이브리드 웹 구현.
+- **초개인화 필터링 자동화 (Python + AI)**: 백엔드 크롤러가 정책 데이터를 수집하고 LLM을 통해 메타데이터를 추출(구조화)하여, 유저 프로필과 매칭되는 정보만 선별 푸시.
+- **음성 인식 기반 AI 비서**: 복잡한 메뉴 탐색 없이 "나 오늘 전세금 대출 알아보고 싶어"라는 자연어 음성만으로 최적의 서비스 페이지로 라우팅.
 
 ---
 
-## 2. 기획 배경 및 사용자 페인 포인트 (Background & Pain Points)
+## 2. 시스템 아키텍처 및 설계 (System Architecture)
 
-### 사용자가 겪는 문제점 (Pain Points)
-1. **공공데이터의 파편화**: 정부24, 복지로, 국토교통부, 외교부 등 정보를 얻기 위해 방문해야 하는 사이트가 너무 많고 흩어져 있음.
-2. **맞춤형 정보의 부재**: 수많은 정책과 지원금 중 '나'의 조건(나이, 소득, 가구 형태 등)에 맞는 혜택을 찾기 위해 일일이 공문을 읽고 자격 요건을 해석해야 함.
-3. **복잡한 접근성과 딱딱한 UI/UX**: 기존 공공기관 사이트 특유의 복잡한 메뉴 구조와 어려운 행정 용어로 인해 디지털 소외 계층 및 일반 유저의 피로도가 높음.
+전체 시스템은 크게 **프론트엔드(React)**, **BaaS(Firebase)**, **AI 데이터 파이프라인(Python)** 3가지 축으로 분리되어 비동기적으로 동작하도록 마이크로서비스(MSA) 형태로 설계되었습니다.
 
-### 해결 방안 (Solution)
-- 10개 이상의 공공기관 API를 단일 앱으로 통합하여 원스톱 서비스 제공.
-- AI 언어모델(LLM)을 백그라운드 크롤러에 도입하여, 줄글로 된 정책 데이터를 구조화하고 유저 프로필과 매칭하는 '초개인화 알림 엔진' 구축.
-- Glassmorphism 디자인과 3D 커버플로우 등 최신 웹 UI/UX 트렌드를 반영하여 직관적이고 아름다운 사용자 경험 제공.
+```mermaid
+graph TD
+    subgraph Frontend [React.js Frontend]
+        UI[UI/UX Components]
+        Context[Auth Context]
+        Voice[Web Speech API]
+        Map[Leaflet Map Viewer]
+    end
 
----
+    subgraph Backend [Firebase BaaS]
+        Auth[Firebase Authentication]
+        FS[Firestore Database]
+    end
 
-## 3. 핵심 기술 및 AI 도입 (Core Technologies & AI Integration)
+    subgraph AI_Engine [AI & Data Pipeline]
+        Cron[Python Crawler Script]
+        OpenAI[OpenAI GPT-4o-mini]
+        Gemini[Google Gemini 1.5 Pro]
+    end
 
-### 3.1. AI 기반 의도 파악 및 보이스 라우팅 (OpenAI GPT-4o-mini)
-- **사용처**: 통합 AI 어시스턴트 및 메인 홈 음성 검색 모달
-- **적용 방식**: 
-  - 사용자가 마이크를 통해 자연어로 질문(예: "요즘 전세 사기 피하는 법 알려줘")을 하면, Web Speech API가 이를 텍스트로 변환.
-  - 변환된 텍스트를 OpenAI API로 전송, 프롬프트 엔지니어링을 통해 사용자의 의도를 분석.
-  - 분석 결과에 따라 복지, 부동산, 교통 등 8개의 주요 도메인 중 가장 적합한 페이지로 자동 이동(Routing) 처리.
+    subgraph External_APIs [외부 공공데이터]
+        OpenAPI[정부 공공데이터 OpenAPI 10종]
+        RSS[대한민국 정책브리핑 RSS]
+    end
 
-### 3.2. 초개인화 정책 크롤링 파이프라인 (Python + Google Gemini API)
-- **사용처**: 사용자의 마이페이지 맞춤 조건(나이, 직업, 가구 형태 등)에 따른 실시간 정책 푸시 알림
-- **왜 필요한가**: 공공기관의 RSS 피드나 정책 데이터는 대상자나 조건이 복잡한 줄글(자연어)로 작성되어 있어, 단순 키워드 검색이나 정규식(Regex) 매칭으로는 정확한 타겟팅이 불가능함.
-- **적용 방식 (Architecture)**:
-  1. Python 기반의 크롤링 스크립트가 주기적으로 대한민국 정책 RSS 데이터를 수집.
-  2. 수집된 정책의 본문 텍스트를 Gemini API에 전달하여 수혜 대상(예: '청년', '소상공인', '임산부' 등)과 지역 카테고리를 JSON 배열 형태로 정확하게 추출(구조화).
-  3. 구조화된 메타데이터를 Firebase Firestore에 실시간으로 업로드.
-  4. 프론트엔드(React)에서 유저의 프로필 데이터와 Firestore의 정책 데이터를 교차 검증하여, 조건이 완벽히 일치하는 유저에게만 맞춤형 알림 제공.
+    UI --> |음성 인식 텍스트| OpenAI
+    OpenAI --> |의도 분석 후 경로 반환| UI
+    UI <--> |인증 및 세션| Auth
+    UI <--> |사용자 프로필 & 알림 내역| FS
+    UI <--> |REST API 실시간 호출| OpenAPI
 
----
-
-## 4. 서비스 주요 기능 및 도메인 (Service Features)
-
-| 서비스 도메인 | 주요 기능 및 특징 | 활용 데이터 / API |
-|---|---|---|
-| **통합 AI 어시스턴트** | 전체 공공데이터를 기반으로 자연어 질문에 답변 및 기능 추천 | OpenAI API, 내부 목업 DB |
-| **복지 / 지원금 조회** | 연령, 소득 수준에 따른 맞춤형 지원금 조회 및 상세 공문 제공 | 정부 보조금24 API 데이터 구조화 |
-| **부동산 / 입지 분석** | 예산 및 라이프스타일에 따른 맞춤형 동네 추천 및 전월세 시세 확인 | 국토교통부 실거래가, 상권 정보 API |
-| **글로벌 재난/안전** | 전 세계 여행 위험 경보, 특별여행주의보 실시간 지도(Leaflet) 시각화 | 외교부 해외안전여행 API |
-| **보건 / 의료 내비게이션** | 내 주변 심야 공공약국, 1등급 병원, 건강검진 기관 위치 제공 | 공공데이터포털 전국 약국/병원 API |
-| **실시간 도로 / CCTV** | 전국 고속도로 실시간 소통 현황 및 구간별 CCTV 스트리밍 제공 | 국가교통정보센터(ITS) API |
-| **환경 / 재난 알리미** | 내 주변 실시간 미세먼지 수치 및 비상시 대피소(지진, 민방위) 위치 안내 | 한국환경공단 에어코리아 API |
-| **교육 / 보육 솔루션** | 전국 어린이집 현황 및 학군 분석 데이터 제공 | 영유아 보육 API, 학교 알리미 API |
-| **문화 / 여가 가이드** | 주말 무료 축제, 국공립 캠핑장, 체육시설 예약 현황 안내 | 문화체육관광부 공연/축제 API |
+    RSS --> |정기 수집| Cron
+    Cron --> |자연어 본문 분석| Gemini
+    Gemini --> |타겟 계층/지역 JSON 구조화| Cron
+    Cron --> |데이터베이스 업데이트| FS
+```
 
 ---
 
-## 5. 정보 구조도 (Information Architecture)
+## 3. 핵심 기술 및 AI 도입 상세 (Core Tech & AI)
 
-- **Home (메인보드)**
-  - 3D 커버플로우 메뉴 (8대 도메인 퀵 접근)
-  - 플로팅 보이스 라우팅 모달
-- **통합 AI 어시스턴트 (AiAssistant)**
-  - 대화형 챗봇 인터페이스 및 추천 질문 칩
-- **각 도메인별 대시보드 (DomainLayout)**
-  - 좌측 LNB (세부 메뉴 네비게이션)
-  - KPI 요약 카드 및 필터링 옵션
-  - 지도 시각화 (MapContainer) 및 리스트 뷰
-- **마이페이지 (MyPage)**
-  - 개인 프로필 및 맞춤 조건(나이, 소득, 직업) 설정
-  - AI 크롤러 연동 '맞춤 알림' 수신함
-  - 관심 스크랩 및 커뮤니티 활동 내역
-- **인증 (Auth)**
-  - 로그인 및 회원가입 (Firebase Auth)
+본 프로젝트의 가장 큰 차별점은 단순한 공공데이터 뷰어를 넘어, 데이터 전처리와 UX 향상 과정에 생성형 AI를 깊숙이 결합했다는 점입니다.
 
----
+### 3.1 초개인화 정책 크롤링 파이프라인 (Data Pipeline with AI)
+**왜 크롤링 봇에 AI를 결합했는가?**
+일반적인 크롤러는 키워드(예: '청년')가 본문에 있는지 여부만 판단할 수 있습니다. 하지만 "청년을 제외한 모든 계층 지원"이라는 문장이 있을 경우 단순 키워드 매칭은 심각한 오류를 범합니다. 이를 해결하기 위해 추론 능력이 있는 LLM을 도입했습니다.
 
-## 6. 사용된 기술 스택 및 오픈소스 (Tech Stack)
+- **작동 원리 (Python 기반)**
+  1. `feedparser`와 `requests`를 사용해 '대한민국 정책브리핑' 등 주요 정부 RSS 피드를 실시간으로 긁어옵니다. (이 과정에서 공공기관 서버의 크롤링 봇 차단을 우회하기 위해 `User-Agent` 헤더 최적화 적용).
+  2. HTML 태그가 섞인 원문을 정규식(`re`)을 통해 순수 텍스트로 클렌징 처리.
+  3. 클렌징된 본문을 **Google Gemini API**에 전달하며 정교한 프롬프트(Prompt)를 주입합니다.
+     - *프롬프트 내용*: "이 문서를 분석하여 수혜 대상(targets)을 ['청년', '소상공인', '전체' 등] 배열로 추출하고 1줄 요약(summary)을 JSON 형태로 반환하라."
+  4. AI가 응답한 JSON 데이터를 검증한 뒤, `firebase-admin` SDK를 통해 Firestore DB에 `policies` 컬렉션 문서로 저장합니다.
+- **프론트엔드 연동**: 리액트 앱은 Firestore를 구독(Subscribe)하다가 새로운 정책이 올라오면, 현재 로그인된 사용자의 DB 프로필 조건과 AI가 파싱한 `targets` 배열의 교집합을 연산하여 일치할 경우에만 UI에 알림을 띄웁니다.
 
-### Frontend
-- **Framework**: React.js (Vite)
-- **Routing**: React Router DOM
-- **Styling**: Vanilla CSS (Glassmorphism, CSS Animations, CSS Variables 적용)
-- **Map Visualization**: Leaflet, React-Leaflet
-- **Icons**: Lucide React
-- **Markdown**: React-Markdown (AI 답변 렌더링)
-
-### Backend & Database
-- **BaaS**: Firebase (Authentication, Firestore)
-- **Cloud Functions**: Firebase Cloud Functions (예정/확장성 고려)
-
-### AI & Data Pipeline (Python)
-- **Language**: Python 3.8+
-- **Crawler Libraries**: feedparser, requests, beautifulsoup4
-- **AI Models**: Google Generative AI (Gemini 1.5 Pro) SDK, OpenAI API
-- **Infrastructure**: dotenv, firebase-admin
+### 3.2 AI 음성 라우팅 엔진 (Voice Navigation)
+- **작동 원리**
+  1. 프론트엔드의 커스텀 훅(`useSpeechRecognition`)을 통해 브라우저 네이티브 Web Speech API를 호출, 사용자의 음성을 실시간 텍스트로 변환(STT)합니다.
+  2. 텍스트가 완성되면 **OpenAI API (GPT-4o-mini)**로 전송합니다.
+  3. LLM은 사전 주입된 System Prompt에 따라 사용자의 모호한 의도(예: "집주인이 돈 안 주는데 어떡해?")를 정확한 도메인(예: `/real-estate` 부동산 카테고리)으로 판단하여 단일 URL 텍스트만 응답합니다.
+  4. React Router가 해당 URL로 즉시 화면을 전환합니다.
+- **기술적 트러블슈팅**: 리액트의 `useEffect` 생명주기와 Speech API 인스턴스가 충돌하여 마이크가 즉시 꺼지는 무한 렌더링 루프 버그가 발생했습니다. 이를 해결하기 위해 `useRef`를 활용해 콜백 함수들을 고정(Stable reference)시키고 컴포넌트 마운트 상태를 분리하여 마이크 안정성을 극대화했습니다.
 
 ---
 
-## 7. UI/UX 디자인 철학 (Design Principles)
+## 4. UI/UX 설계 및 프론트엔드 구현 (Frontend Implementation)
 
-1. **유리 질감(Glassmorphism)과 시각적 계층화**: 복잡한 표나 텍스트 위주의 공공데이터를 반투명한 유리 패널 위에 얹어, 정보의 우선순위를 명확히 하고 세련된 느낌을 부여.
-2. **동적 피드백과 마이크로 인터랙션**: 버튼 호버, 카드 클릭, 데이터 로딩 스켈레톤(Skeleton) 등 사용자 액션에 대해 즉각적이고 부드러운 애니메이션을 제공하여 앱이 '살아있다'는 감각을 전달.
-3. **콘텍스트 유지**: 풀스크린 맵 시각화 시, 주요 필터나 상세 정보를 플로팅(Floating) 카드 형태로 띄워 사용자가 지도의 맥락을 잃지 않고 데이터를 탐색할 수 있도록 설계.
+디지털 소외 계층도 쉽게 사용할 수 있으면서도 모던한 느낌을 주기 위해 **Glassmorphism(유리 질감)**과 **3D 애니메이션**을 주요 디자인 언어로 채택했습니다.
+
+### 4.1 3D 커버플로우(Coverflow) 네비게이션
+- 8개의 방대한 카테고리를 화면에 나열하면 복잡도가 올라갑니다. 이를 방지하기 위해 CSS `transform: rotateZ`와 `z-index` 동적 계산 알고리즘을 활용하여 카드가 원형 궤도를 도는 형태의 무한 롤링 커버플로우를 구현했습니다.
+- 유저는 스크롤 압박 없이 화면 중앙에서 모든 카테고리를 입체적으로 탐색할 수 있습니다.
+
+### 4.2 지도 시각화 (React-Leaflet)
+- **글로벌 재난/안전 대시보드**: 외교부의 ISO 국가 코드 데이터를 파싱한 뒤 좌표로 매핑하여 Leaflet 지도 위에 커스텀 애니메이션 마커(Pulse effect)로 시각화했습니다. 위험 단계(1~4단계)에 따라 색상이 동적으로 변경됩니다.
+- 사용자가 마커를 클릭하면 지도가 해당 좌표로 부드럽게 이동(FlyTo)하며 해당 국가의 상세 행동 지침을 보여주는 패널이 확장됩니다.
+
+### 4.3 상태 관리 및 성능 최적화
+- **Auth Context**: Firebase Auth를 React Context API와 결합하여 전역 상태로 관리, 로그인 여부에 따라 Private 라우팅 처리를 구현했습니다.
+- **Glow Hover Effect**: 마우스 포인터의 위치(X, Y)를 계산하여 CSS 변수(`--mouse-x`)로 전달해, 카드 컴포넌트에 마우스를 올렸을 때 빛이 따라다니는 듯한 고급스러운 마이크로 인터랙션을 JS와 CSS의 결합으로 최적화하여 구현했습니다.
+
+---
+
+## 5. 서비스 주요 도메인 (Key Features)
+
+| 서비스 명칭 | 활용 데이터 및 기능 설명 |
+|---|---|
+| **마이페이지 (맞춤 알림)** | 내 프로필(나이/가구형태) 설정 및 AI 크롤러가 매칭한 실시간 정책 알림 수신 |
+| **통합 AI 어시스턴트** | 전체 시스템의 가이드 역할 및 대화형 질의응답 챗봇 (Markdown 렌더링 지원) |
+| **복지/지원금 조회기** | 정부 보조금24 API를 활용한 전국/지자체별 복지 혜택 리스트업 및 조건 필터 |
+| **부동산/입지 분석기** | 국토교통부 실거래가 오픈 API 기반, 예산에 맞는 전월세 및 안심 상권 분석 |
+| **글로벌 재난 대시보드** | 외교부 해외안전여행 API 연동, 위험 국가 지도 시각화 및 대사관 연락처 제공 |
+| **보건/의료 내비게이션** | 공공데이터포털 기반 심야 공공약국, 병원 등급 및 건강검진 기관 위치 탐색 |
+| **실시간 도로/CCTV** | 국가교통정보센터(ITS) API 기반 전국 고속도로 소통 현황 및 CCTV 영상 송출 |
+| **환경/재난 알리미** | 에어코리아 실시간 미세먼지 수치 및 지진/민방위 대피소 위치 정보 |
+| **교육 및 문화 가이드** | 문화체육관광부 공연/축제 현황 및 지역별 학군/어린이집 인프라 정보 |
+
+---
+
+## 6. 사용된 기술 스택 (Tech Stack)
+
+- **Frontend**: React.js, Vite, React Router DOM, React-Leaflet (Map), Lucide React (Icons), CSS Modules
+- **Backend**: Firebase Authentication, Cloud Firestore (NoSQL)
+- **AI & Data Pipeline**: Python 3.8+, Google Generative AI (Gemini 1.5 Pro), OpenAI API (GPT-4o-mini), `feedparser`, `requests`
+- **Deployment & Version Control**: Git, GitHub, (호스팅 예정: Vercel / Firebase Hosting)
