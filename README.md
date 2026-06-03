@@ -116,6 +116,39 @@ flowchart LR
     D -->|복지 관련 질문| G(/welfare 페이지 이동)
 ```
 
+### 4.3 공공데이터 OpenAPI 연동 및 지도 시각화 (Data Visualization)
+방대한 공공데이터를 텍스트가 아닌 직관적인 UI로 변환하는 과정입니다. (예: 글로벌 재난 대시보드)
+
+```mermaid
+flowchart TD
+    A[외교부/국토부 OpenAPI] -->|JSON/XML 데이터 요청| B(프론트엔드 API Service)
+    B -->|데이터 파싱 및 정제| C{데이터 종류 판별}
+    C -->|위치 데이터 위도/경도| D[Leaflet.js 마커 매핑]
+    C -->|통계 데이터 실거래가| E[Bar Chart 시각화]
+    C -->|텍스트 데이터| F[요약 카드 UI 컴포넌트]
+    D --> G[대시보드 화면 렌더링]
+    E --> G
+    F --> G
+```
+
+### 4.4 사용자 인증 및 개인화 데이터 흐름 (Auth & Profile Flow)
+사용자의 프로필 조건이 어떻게 안전하게 관리되고 맞춤 서비스로 이어지는지 보여줍니다.
+
+```mermaid
+sequenceDiagram
+    participant User as 사용자
+    participant React as 프론트엔드 Context
+    participant Auth as Firebase Auth
+    participant DB as Firestore DB
+
+    User->>Auth: 1. 소셜/이메일 로그인 요청
+    Auth-->>React: 2. 고유 UID 및 보안 토큰 발급
+    React->>DB: 3. 마이페이지 진입 시 UID 기반 프로필 조회
+    DB-->>React: 4. 나이, 직업, 가구 형태 데이터 반환
+    React->>User: 5. 내 조건에 맞는 맞춤형 대시보드 렌더링
+    User->>DB: 6. 관심 있는 정책 '스크랩 북마크' 저장
+```
+
 ---
 
 ## 5. 전체 시스템 아키텍처 (System Architecture)
