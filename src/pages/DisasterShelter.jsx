@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ShieldAlert, Tent, MapPin, Search } from 'lucide-react';
 import AiInsightCard from '../components/AiInsightCard';
+import { analytics } from '../firebase';
+import { logEvent } from 'firebase/analytics';
 
 function DisasterShelter() {
   const [loading, setLoading] = useState(true);

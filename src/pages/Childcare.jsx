@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Building, MapPin, Phone, Users, Search, AlertCircle, ExternalLink, Hash, Info } from 'lucide-react';
 import { sigunguCodes } from '../data/sigunguCodes';
+import { analytics } from '../firebase';
+import { logEvent } from 'firebase/analytics';
 
 function Childcare() {
   const [selectedSido, setSelectedSido] = useState('');
@@ -22,6 +24,10 @@ function Childcare() {
   }, [selectedSido]);
 
   const handleSearch = async () => {
+    if (analytics) {
+      logEvent(analytics, 'search_childcare', { region: formData.region, type: formData.type });
+    }
+
     if (!selectedSigungu) {
       setErrorMsg('조회할 시/군/구를 선택해주세요.');
       return;

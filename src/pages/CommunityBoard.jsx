@@ -3,6 +3,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { MessageSquare, ThumbsUp, Eye, Clock, Hash, ChevronLeft, ChevronRight } from 'lucide-react';
 import { collection, query, where, orderBy, onSnapshot, addDoc, Timestamp } from 'firebase/firestore';
 import { db, auth } from '../firebase';
+import { analytics } from '../firebase';
+import { logEvent } from 'firebase/analytics';
 
 function CommunityBoard({ category }) {
   const [activeTab, setActiveTab] = useState('latest');
@@ -101,6 +103,10 @@ function CommunityBoard({ category }) {
   }, [category, activeTab]);
 
   const handleWriteClick = () => {
+
+    if (analytics) {
+      logEvent(analytics, 'click_write_post', { category: category });
+    }
     const currentPath = location.pathname.replace(/\/$/, '');
     navigate(`${currentPath}/write`);
   };

@@ -2,6 +2,8 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { Search, MapPin, Phone, School, Globe, ArrowRight, BarChart2, BookOpen } from 'lucide-react';
 import { REGIONS } from '../utils/regions';
 import AiInsightCard from '../components/AiInsightCard';
+import { analytics } from '../firebase';
+import { logEvent } from 'firebase/analytics';
 
 const EDU_OFFICE_CODES = {
   '서울': 'B10', '부산': 'C10', '대구': 'D10', '인천': 'E10', '광주': 'F10',
@@ -82,6 +84,10 @@ function SchoolAnalysis() {
 
   const handleSearch = (e) => {
     e.preventDefault();
+    if (analytics) {
+      logEvent(analytics, 'search_school', { region: formData.region, schoolLevel: formData.schoolLevel });
+    }
+
     fetchSchools();
   };
 

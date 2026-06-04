@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Search, MapPin, Calendar, CreditCard, ExternalLink, Activity, AlertCircle, ChevronRight, CheckCircle2 } from 'lucide-react';
 import AiInsightCard from '../components/AiInsightCard';
+import { analytics } from '../firebase';
+import { logEvent } from 'firebase/analytics';
 
 function SportsReservation() {
   const [loading, setLoading] = useState(true);

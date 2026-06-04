@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Compass, ArrowRight, BookOpen, AlertCircle, Building, Search } from 'lucide-react';
 import BookmarkButton from '../components/BookmarkButton';
+import { analytics } from '../firebase';
+import { logEvent } from 'firebase/analytics';
 
 function YouthPolicy() {
   const [policies, setPolicies] = useState([]);

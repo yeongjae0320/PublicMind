@@ -4,6 +4,8 @@ import { MOCK_SUBSIDIES } from '../data/mockSubsidies';
 import AiInsightCard from '../components/AiInsightCard';
 import BookmarkButton from '../components/BookmarkButton';
 import { useNavigate } from 'react-router-dom';
+import { analytics } from '../firebase';
+import { logEvent } from 'firebase/analytics';
 
 function WelfareSearch() {
   const navigate = useNavigate();
@@ -26,6 +28,10 @@ function WelfareSearch() {
 
   const handleSearch = async (e) => {
     e.preventDefault();
+    if (analytics) {
+      logEvent(analytics, 'search_welfare', { ...formData });
+    }
+
     if (!formData.age || !formData.location || !formData.income || !formData.jobType) {
       alert("모든 조건을 입력해주세요!");
       return;

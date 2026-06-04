@@ -4,6 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { auth, googleProvider } from '../firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signInWithPopup, sendPasswordResetEmail } from 'firebase/auth';
 import { useAuth } from '../contexts/AuthContext';
+import { analytics } from '../firebase';
+import { logEvent } from 'firebase/analytics';
 
 function Auth() {
   const [isLogin, setIsLogin] = useState(true);
