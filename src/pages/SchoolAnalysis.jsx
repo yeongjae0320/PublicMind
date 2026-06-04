@@ -214,7 +214,7 @@ function SchoolAnalysis() {
         )}
         
         {loading && (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '20px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '20px' }}>
             {[1, 2, 3, 4].map(i => (
               <div key={i} className="glass-panel skeleton-pulse" style={{ height: '220px', borderRadius: '16px' }}></div>
             ))}
@@ -223,7 +223,7 @@ function SchoolAnalysis() {
 
         {/* 학교 리스트 렌더링 */}
         {!error && !loading && (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(380px, 1fr))', gap: '20px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '20px' }}>
             {currentSchools.map((school, idx) => (
               <div key={idx} className="glass-panel hover-lift" style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>

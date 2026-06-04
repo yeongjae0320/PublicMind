@@ -160,7 +160,7 @@ function WelfareSearch() {
           animation: skeleton-loading 1.5s infinite ease-in-out;
         }
       `}</style>
-      <div className="grid-container" style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', maxWidth: '1200px', margin: '0 auto', gap: '24px' }}>
+      <div className="grid-container responsive-grid-1-15" style={{ maxWidth: '1200px', margin: '0 auto', gap: '24px' }}>
         
         {/* Input Form Panel */}
         <div className="glass-panel" style={{ padding: '32px', height: '100%', display: 'flex', flexDirection: 'column' }}>

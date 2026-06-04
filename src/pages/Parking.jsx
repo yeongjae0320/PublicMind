@@ -279,7 +279,7 @@ function Parking() {
             <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>* 정보없음: 민영/타지역 주차장</span>
           </div>
           
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '16px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '16px' }}>
             {loading ? (
               <>
                 <div className="skeleton-pulse" style={{ height: '90px', borderRadius: '16px' }}></div>

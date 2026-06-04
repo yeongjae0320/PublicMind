@@ -341,24 +341,18 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     width: 100% !important;
   }
   .responsive-sidebar .glass-panel {
-    padding: 16px !important;
+    padding: 32px 32px !important; /* Increase padding to bring content to the center */
   }
-  /* Horizontal scroll for sidebar menu items on mobile */
+  /* Vertical timeline layout for sidebar menu on mobile */
   .responsive-sidebar .sidebar-menu-container {
     display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    gap: 12px;
+    flex-direction: column !important;
+    padding-right: 12px;
+    padding-top: 8px;
     padding-bottom: 8px;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-  }
-  .responsive-sidebar .sidebar-menu-container::-webkit-scrollbar {
-    display: none;
   }
   .responsive-sidebar .sidebar-menu-item {
     margin-bottom: 0 !important;
-    white-space: nowrap;
   }
   
   .realestate-top-section {
@@ -403,5 +397,43 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .coverflow-wrapper {
+    transform: scale(0.75);
+    margin-bottom: -80px;
+  }
+  .community-post-item {
+    padding: 16px 20px !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+  .community-tabs-wrapper {
+    padding: 16px 20px 0 20px !important;
+  }
+  .community-post-item > div:last-child {
+    flex-direction: row !important;
+    align-items: center !important;
+    width: 100% !important;
+    justify-content: flex-start !important;
+    gap: 16px !important;
+    padding-top: 8px !important;
+    border-top: 1px solid var(--border-light) !important;
+  }
+  .responsive-sidebar-wrapper {
+    flex-direction: column !important;
+  }
+  .responsive-sidebar-wrapper aside {
+    width: 100% !important;
+    position: static !important;
+  }
+  .responsive-sidebar {
+    position: static !important;
   }
 }

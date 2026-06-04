@@ -8,7 +8,7 @@ function DomainLayout({ title, menus }) {
       <div className="responsive-sidebar" style={{ display: 'flex', flexDirection: 'column', gap: '16px', position: 'sticky', top: '100px' }}>
         {/* LNB (Local Navigation Bar) */}
         <aside className="glass-panel" style={{ padding: '24px', background: 'rgba(255,255,255,0.6)', borderRadius: '24px', border: '1px solid var(--border-light)', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <h2 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '16px', color: 'var(--text-primary)', paddingLeft: '8px' }}>{title}</h2>
+          <h2 style={{ fontSize: '1.25rem', fontWeight: 800, marginTop: '8px', marginBottom: '24px', color: 'var(--text-primary)', paddingLeft: '12px' }}>{title}</h2>
           
           <style>{`
             .timeline-nav-item {
@@ -27,7 +27,7 @@ function DomainLayout({ title, menus }) {
           
           <div style={{ position: 'relative', marginLeft: '12px', paddingBottom: '16px', paddingTop: '16px' }}>
             {/* Background vertical line */}
-            <div style={{ position: 'absolute', left: '11px', top: '24px', bottom: '24px', width: '3px', background: 'var(--border-light)', zIndex: 0, borderRadius: '4px' }}></div>
+            <div className="timeline-vertical-line" style={{ position: 'absolute', left: '11px', top: '24px', bottom: '24px', width: '3px', background: 'var(--border-light)', zIndex: 0, borderRadius: '4px' }}></div>
             
             <div className="sidebar-menu-container" style={{ display: 'flex', flexDirection: 'column', gap: '36px' }}>
               {menus.map((menu, idx) => (
@@ -35,7 +35,7 @@ function DomainLayout({ title, menus }) {
                   key={idx}
                   to={menu.path} 
                   style={{ textDecoration: 'none', position: 'relative', zIndex: 1, display: 'flex', alignItems: 'center', gap: '16px' }}
-                  className="timeline-nav-item sidebar-menu-item"
+                  className={({isActive}) => `timeline-nav-item sidebar-menu-item ${isActive ? 'active' : ''}`}
                 >
                   {({isActive}) => (
                     <>

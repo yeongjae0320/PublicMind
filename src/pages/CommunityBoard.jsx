@@ -132,7 +132,7 @@ function CommunityBoard({ category }) {
 
       <div style={{ background: 'rgba(255,255,255,0.95)', borderRadius: '16px', border: '1px solid var(--border-light)', overflow: 'hidden', boxShadow: 'var(--shadow-sm)' }}>
         {/* Tabs and Write Button */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border-light)', padding: '16px 48px 0 48px' }}>
+        <div className="community-tabs-wrapper" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border-light)', padding: '16px 48px 0 48px' }}>
           <div style={{ display: 'flex', gap: '16px' }}>
             <div 
               style={{ padding: '16px 8px', cursor: 'pointer', fontWeight: activeTab === 'latest' ? 700 : 600, color: activeTab === 'latest' ? 'var(--primary-blue)' : 'var(--text-secondary)', borderBottom: activeTab === 'latest' ? '2px solid var(--primary-blue)' : '2px solid transparent', fontSize: '1rem', transition: 'all 0.2s' }}
@@ -182,6 +182,7 @@ function CommunityBoard({ category }) {
               return (
               <div 
                 key={post.id} 
+                className="community-post-item"
                 onClick={() => navigate(`${location.pathname.replace(/\/$/, '')}/${post.id}`)}
                 style={{ padding: '24px 48px', borderBottom: index !== currentPosts.length - 1 ? '1px solid var(--border-light)' : 'none', display: 'flex', justifyContent: 'space-between', gap: '24px', cursor: 'pointer', transition: 'background 0.2s', background: defaultBg }} 
                 onMouseEnter={(e) => e.currentTarget.style.background = hoverBg} 
@@ -202,14 +203,14 @@ function CommunityBoard({ category }) {
                         </span>
                       )}
                     </div>
-                    <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '-0.01em', display: 'flex', alignItems: 'center', gap: '6px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                      <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{post.title}</span>
-                      <span style={{ color: post.comments > 0 ? 'var(--primary-blue)' : 'var(--text-muted)', opacity: post.comments > 0 ? 1 : 0.6, fontWeight: 700, fontSize: '0.95rem' }}>
+                    <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '-0.01em', display: 'flex', alignItems: 'flex-start', gap: '6px', minWidth: 0, width: '100%' }}>
+                      <span style={{ flex: 1, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden', textOverflow: 'ellipsis', lineHeight: 1.4, wordBreak: 'keep-all' }}>{post.title}</span>
+                      <span style={{ color: post.comments > 0 ? 'var(--primary-blue)' : 'var(--text-muted)', opacity: post.comments > 0 ? 1 : 0.6, fontWeight: 700, fontSize: '0.95rem', flexShrink: 0, marginTop: '2px' }}>
                         [{post.comments || 0}]
                       </span>
                     </h3>
                   </div>
-                  <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '8px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '8px', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden', textOverflow: 'ellipsis', lineHeight: 1.5, wordBreak: 'break-word', width: '100%' }}>
                     {post.content}
                   </p>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 500 }}>
@@ -234,7 +235,7 @@ function CommunityBoard({ category }) {
 
         {/* Pagination UI */}
         {totalPages > 1 && !loading && !errorMsg && (
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px', padding: '24px', borderTop: '1px solid var(--border-light)' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px', padding: '24px', borderTop: '1px solid var(--border-light)', flexWrap: 'wrap' }}>
             <button 
               onClick={() => paginate(currentPage > 1 ? currentPage - 1 : 1)}
               disabled={currentPage === 1}

@@ -157,7 +157,7 @@ function EmbassyContacts() {
               총 <span style={{ color: 'var(--primary-blue)' }}>{filteredContacts.length}</span>개의 영사관이 검색되었습니다.
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '24px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '24px' }}>
               {currentContacts.map((contact, idx) => (
                 <div key={idx} className="glass-panel hover-lift" style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
                   <div style={{ borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: '16px' }}>
@@ -237,7 +237,7 @@ function EmbassyContacts() {
         )}
 
         {loading && (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '24px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '24px' }}>
             {[1, 2, 3, 4, 5, 6].map(i => (
               <div key={i} className="glass-panel skeleton-pulse" style={{ height: '250px', borderRadius: '16px' }}></div>
             ))}

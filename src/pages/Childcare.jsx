@@ -25,7 +25,7 @@ function Childcare() {
 
   const handleSearch = async () => {
     if (analytics) {
-      logEvent(analytics, 'search_childcare', { region: formData.region, type: formData.type });
+      logEvent(analytics, 'search_childcare', { sido: selectedSido, sigungu: selectedSigungu });
     }
 
     if (!selectedSigungu) {
@@ -218,7 +218,7 @@ function Childcare() {
               검색 중...
             </h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '24px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '24px' }}>
             {[1, 2, 3, 4, 5, 6].map((i) => (
               <div key={i} className="panel" style={{ padding: '24px', display: 'flex', flexDirection: 'column', height: '100%', minHeight: '180px' }}>
                 <div className="skeleton-pulse" style={{ width: '70%', height: '24px', borderRadius: '4px', marginBottom: '24px' }}></div>
@@ -244,7 +244,7 @@ function Childcare() {
           </div>
           
           {centers.length > 0 ? (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '24px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '24px' }}>
               {centers.map((center) => (
                 <div key={center.id} className="panel hover-effect" style={{ padding: '24px', display: 'flex', flexDirection: 'column', height: '100%' }}>
                   

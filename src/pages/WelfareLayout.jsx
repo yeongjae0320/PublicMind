@@ -6,7 +6,7 @@ function WelfareLayout() {
   const location = useLocation();
 
   return (
-    <div style={{ display: 'flex', gap: '32px', minHeight: 'calc(100vh - 120px)', alignItems: 'flex-start' }}>
+    <div className="responsive-sidebar-wrapper" style={{ display: 'flex', gap: '32px', minHeight: 'calc(100vh - 120px)', alignItems: 'flex-start' }}>
       {/* LNB (Local Navigation Bar) */}
       <aside style={{ width: '240px', flexShrink: 0, padding: '24px', background: 'rgba(255,255,255,0.6)', backdropFilter: 'blur(12px)', borderRadius: '24px', border: '1px solid var(--border-light)', display: 'flex', flexDirection: 'column', gap: '8px', position: 'sticky', top: '100px' }}>
         <h2 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '16px', color: 'var(--text-primary)', paddingLeft: '8px' }}>복지/지원금</h2>
