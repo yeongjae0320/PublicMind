@@ -1,6 +1,7 @@
-const { onCall, HttpsError } = require("firebase-functions/v2/https");
+const { onCall, onRequest, HttpsError } = require("firebase-functions/v2/https");
 const admin = require("firebase-admin");
 const axios = require("axios");
+const cors = require("cors")({ origin: true });
 
 admin.initializeApp();
 
@@ -96,4 +97,62 @@ exports.naverLogin = onCall(async (request) => {
     console.error("Naver Login Error:", error);
     throw new HttpsError("internal", "Failed to create custom token for Naver login");
   }
+});
+
+exports.proxyApi = onRequest({ region: "asia-northeast3" }, (req, res) => {
+  cors(req, res, async () => {
+    try {
+      const targetUrl = req.query.url;
+      if (!targetUrl) {
+        return res.status(400).send("Missing target URL");
+      }
+
+      // Whitelist allowed domains for proxy
+      const allowedDomains = [
+        "www.youthcenter.go.kr",
+        "www.safetydata.go.kr",
+        "openapi.seoul.go.kr",
+        "api.childcare.go.kr",
+        "open.neis.go.kr",
+        "openapi.molit.go.kr",
+        "apis.data.go.kr"
+      ];
+
+      const urlObj = new URL(targetUrl);
+      if (!allowedDomains.includes(urlObj.hostname)) {
+        return res.status(403).send("Domain not allowed by proxy");
+      }
+
+      const response = await axios({
+        method: req.method,
+        url: targetUrl,
+        responseType: "arraybuffer", // To properly forward binary data or encoding
+        headers: {
+          "Accept": req.headers["accept"] || "*/*",
+          // Don't forward Origin or Host to avoid CORS/Host mismatch at destination
+        }
+      });
+
+      // Forward response headers safely
+      const excludedHeaders = [
+        "access-control-allow-origin", 
+        "access-control-allow-credentials",
+        "transfer-encoding",
+        "content-encoding",
+        "content-length",
+        "connection",
+        "keep-alive"
+      ];
+      Object.keys(response.headers).forEach(key => {
+        if (!excludedHeaders.includes(key.toLowerCase())) {
+          res.set(key, response.headers[key]);
+        }
+      });
+
+      res.status(response.status).send(response.data);
+    } catch (error) {
+      console.error("Proxy Error:", error.message);
+      res.status(error.response?.status || 500).send(error.response?.data || error.message);
+    }
+  });
 });

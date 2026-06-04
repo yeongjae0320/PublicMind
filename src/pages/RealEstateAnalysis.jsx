@@ -49,7 +49,9 @@ function RealEstateAnalysis() {
     setCurrentPage(1);
 
     try {
-      const response = await fetch(`/api/rtms/1613000/RTMSDataSvcAptTrade/getRTMSDataSvcAptTrade?serviceKey=${apiKey}&LAWD_CD=${lawdCd}&DEAL_YMD=${dealYmd}&numOfRows=1000`);
+      const path = `/1613000/RTMSDataSvcAptTrade/getRTMSDataSvcAptTrade?serviceKey=${apiKey}&LAWD_CD=${lawdCd}&DEAL_YMD=${dealYmd}&numOfRows=1000`;
+      const url = import.meta.env.DEV ? `/api/rtms${path}` : `https://asia-northeast3-publicmind-3e47b.cloudfunctions.net/proxyApi?url=${encodeURIComponent("https://apis.data.go.kr" + path)}`;
+      const response = await fetch(url);
       
       if (!response.ok) {
         if (response.status === 403) {

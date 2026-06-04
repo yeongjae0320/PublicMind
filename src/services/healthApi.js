@@ -1,4 +1,4 @@
-const API_KEY = '7a3edd922501de268c179c92ad1a8dadba4c961d8bec81c71bf969280acf3d99';
+﻿const API_KEY = '7a3edd922501de268c179c92ad1a8dadba4c961d8bec81c71bf969280acf3d99';
 
 // XML Text Parsing Helper
 const getText = (xmlNode, tagName) => {
@@ -35,7 +35,7 @@ const parseHealthXml = (xmlString, type) => {
 
 export const fetchPharmacies = async (lat, lng) => {
   try {
-    const url = `/api/health/B552657/ErmctInsttInfoInqireService/getParmacyLcinfoInqire?serviceKey=${API_KEY}&WGS84_LON=${lng}&WGS84_LAT=${lat}&pageNo=1&numOfRows=30`;
+    const url = `${import.meta.env.DEV ? "/api/health" : "https://apis.data.go.kr"}/B552657/ErmctInsttInfoInqireService/getParmacyLcinfoInqire?serviceKey=${API_KEY}&WGS84_LON=${lng}&WGS84_LAT=${lat}&pageNo=1&numOfRows=30`;
     const response = await fetch(url);
     const text = await response.text();
     return parseHealthXml(text, '약국');
@@ -47,7 +47,7 @@ export const fetchPharmacies = async (lat, lng) => {
 
 export const fetchHospitals = async (lat, lng) => {
   try {
-    const url = `/api/health/B552657/HsptlAsembySearchService/getHsptlMdcncLcinfoInqire?serviceKey=${API_KEY}&WGS84_LON=${lng}&WGS84_LAT=${lat}&pageNo=1&numOfRows=30`;
+    const url = `${import.meta.env.DEV ? "/api/health" : "https://apis.data.go.kr"}/B552657/HsptlAsembySearchService/getHsptlMdcncLcinfoInqire?serviceKey=${API_KEY}&WGS84_LON=${lng}&WGS84_LAT=${lat}&pageNo=1&numOfRows=30`;
     const response = await fetch(url);
     const text = await response.text();
     return parseHealthXml(text, '병·의원');
@@ -59,7 +59,7 @@ export const fetchHospitals = async (lat, lng) => {
 
 export const fetchEmergencyRooms = async (lat, lng) => {
   try {
-    const url = `/api/health/B552657/ErmctInfoInqireService/getEgytLcinfoInqire?serviceKey=${API_KEY}&WGS84_LON=${lng}&WGS84_LAT=${lat}&pageNo=1&numOfRows=30`;
+    const url = `${import.meta.env.DEV ? "/api/health" : "https://apis.data.go.kr"}/B552657/ErmctInfoInqireService/getEgytLcinfoInqire?serviceKey=${API_KEY}&WGS84_LON=${lng}&WGS84_LAT=${lat}&pageNo=1&numOfRows=30`;
     const response = await fetch(url);
     const text = await response.text();
     return parseHealthXml(text, '응급실');
@@ -73,7 +73,7 @@ export const fetchTopHospitals = async (lat, lng, keyword = '') => {
   try {
     // 건강보험심사평가원 병원정보서비스 (getHospBasisList)
     // 위치 기반 쿼리가 실패하는 경우를 대비해, 전국 기본 30개를 가져오고 프론트에서 임의 좌표로 뿌립니다.
-    const url = `/api/health/B551182/hospInfoServicev2/getHospBasisList?serviceKey=${API_KEY}&pageNo=1&numOfRows=30`;
+    const url = `${import.meta.env.DEV ? "/api/health" : "https://apis.data.go.kr"}/B551182/hospInfoServicev2/getHospBasisList?serviceKey=${API_KEY}&pageNo=1&numOfRows=30`;
     const response = await fetch(url);
     const text = await response.text();
     const parser = new DOMParser();

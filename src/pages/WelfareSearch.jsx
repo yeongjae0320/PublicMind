@@ -55,7 +55,9 @@ function WelfareSearch() {
         if (apiKey) {
           try {
             // pageSize=1000으로 1000개를 가져옴
-            const response = await fetch(`/api/youth/go/ythip/getPlcy?apiKeyNm=${apiKey}&pageSize=1000&pageNum=1&rtnType=xml`);
+            const path = `/go/ythip/getPlcy?apiKeyNm=${apiKey}&pageSize=1000&pageNum=1&rtnType=xml`;
+            const fetchUrl = import.meta.env.DEV ? `/api/youth${path}` : `https://asia-northeast3-publicmind-3e47b.cloudfunctions.net/proxyApi?url=${encodeURIComponent("https://www.youthcenter.go.kr" + path)}`;
+            const response = await fetch(fetchUrl);
             if (response.ok) {
               const xmlText = await response.text();
               const parser = new DOMParser();

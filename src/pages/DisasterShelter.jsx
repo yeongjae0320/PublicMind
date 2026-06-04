@@ -86,7 +86,8 @@ function DisasterShelter() {
         const apiKey = '11XW1SUZ8097Q1CD'; // User's Service Key
         
         // 100 rows per request, bounded by map coords
-        const url = `/api/safetydata/V2/api/DSSP-IF-10944?serviceKey=${apiKey}&pageNo=1&numOfRows=100&returnType=json&startLot=${mapBounds.minX}&endLot=${mapBounds.maxX}&startLat=${mapBounds.minY}&endLat=${mapBounds.maxY}`;
+        const path = `/V2/api/DSSP-IF-10944?serviceKey=${apiKey}&pageNo=1&numOfRows=100&returnType=json&startLot=${mapBounds.minX}&endLot=${mapBounds.maxX}&startLat=${mapBounds.minY}&endLat=${mapBounds.maxY}`;
+        const url = import.meta.env.DEV ? `/api/safetydata${path}` : `https://asia-northeast3-publicmind-3e47b.cloudfunctions.net/proxyApi?url=${encodeURIComponent("https://www.safetydata.go.kr" + path)}`;
         
         const response = await fetch(url);
         if (!response.ok) {

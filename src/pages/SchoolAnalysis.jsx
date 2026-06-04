@@ -37,7 +37,8 @@ function SchoolAnalysis() {
 
     try {
       const officeCode = EDU_OFFICE_CODES[sido];
-      let url = `/api/neis/hub/schoolInfo?KEY=${apiKey}&Type=json&pIndex=1&pSize=1000&ATPT_OFCDC_SC_CODE=${officeCode}`;
+      const path = `/hub/schoolInfo?KEY=${apiKey}&Type=json&pIndex=1&pSize=1000&ATPT_OFCDC_SC_CODE=${officeCode}`;
+      let url = import.meta.env.DEV ? `/api/neis${path}` : `https://asia-northeast3-publicmind-3e47b.cloudfunctions.net/proxyApi?url=${encodeURIComponent("https://open.neis.go.kr" + path)}`;
       
       if (schoolLevel) {
         url += `&SCHUL_KND_SC_NM=${encodeURIComponent(schoolLevel)}`;

@@ -21,7 +21,9 @@ function YouthPolicy() {
           throw new Error("API 인증키가 설정되지 않았습니다. .env 파일을 확인해주세요.");
         }
 
-        const response = await fetch(`/api/youth/go/ythip/getPlcy?apiKeyNm=${apiKey}&pageSize=1000&pageNum=1&rtnType=xml`);
+        const path = `/go/ythip/getPlcy?apiKeyNm=${apiKey}&pageSize=1000&pageNum=1&rtnType=xml`;
+        const fetchUrl = import.meta.env.DEV ? `/api/youth${path}` : `https://asia-northeast3-publicmind-3e47b.cloudfunctions.net/proxyApi?url=${encodeURIComponent("https://www.youthcenter.go.kr" + path)}`;
+        const response = await fetch(fetchUrl);
         
         if (!response.ok) {
            throw new Error("서버 응답 오류가 발생했습니다.");

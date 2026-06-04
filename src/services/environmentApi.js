@@ -1,4 +1,4 @@
-const API_KEY = '7a3edd922501de268c179c92ad1a8dadba4c961d8bec81c71bf969280acf3d99';
+﻿const API_KEY = '7a3edd922501de268c179c92ad1a8dadba4c961d8bec81c71bf969280acf3d99';
 
 // Sido name mapping for Kakao Geocoder
 const sidoMapping = {
@@ -39,7 +39,7 @@ const getGradeTextAndColor = (grade, type) => {
 export const fetchFineDust = async (sidoFullName, guName, dongName) => {
   try {
     const sidoName = sidoMapping[sidoFullName] || '서울';
-    const url = `/api/health/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?serviceKey=${API_KEY}&returnType=json&numOfRows=100&pageNo=1&sidoName=${encodeURIComponent(sidoName)}&ver=1.0`;
+    const url = `${import.meta.env.DEV ? "/api/health" : "https://apis.data.go.kr"}/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?serviceKey=${API_KEY}&returnType=json&numOfRows=100&pageNo=1&sidoName=${encodeURIComponent(sidoName)}&ver=1.0`;
     
     // Add 6-second timeout to prevent infinite hanging if API server is down
     const controller = new AbortController();

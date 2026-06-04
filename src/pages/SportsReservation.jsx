@@ -26,7 +26,8 @@ function SportsReservation() {
     
     try {
       // 서울시 공공서비스예약 오픈 API (정식 키 적용 - 최대 100건 조회)
-      let url = `/api/seoul/6344764652706f77313132646f63666d/json/ListPublicReservationSport/1/100/`;
+      const path = `/6344764652706f77313132646f63666d/json/ListPublicReservationSport/1/100/`;
+      let url = import.meta.env.DEV ? `/api/seoul${path}` : `https://asia-northeast3-publicmind-3e47b.cloudfunctions.net/proxyApi?url=${encodeURIComponent("http://openapi.seoul.go.kr:8088" + path)}`;
       if (category !== '전체') {
         url += category;
       }

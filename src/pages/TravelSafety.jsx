@@ -96,7 +96,8 @@ function TravelSafety() {
       try {
         setIsLoading(true);
         const API_KEY = "7a3edd922501de268c179c92ad1a8dadba4c961d8bec81c71bf969280acf3d99";
-        const url = `/api/travel/1262000/TravelAlarmService2/getTravelAlarmList2?serviceKey=${API_KEY}&returnType=JSON&numOfRows=200&pageNo=1`;
+        const path = `/1262000/TravelAlarmService2/getTravelAlarmList2?serviceKey=${API_KEY}&returnType=JSON&numOfRows=200&pageNo=1`;
+        const url = import.meta.env.DEV ? `/api/travel${path}` : `https://asia-northeast3-publicmind-3e47b.cloudfunctions.net/proxyApi?url=${encodeURIComponent("http://apis.data.go.kr" + path)}`;
         
         const res = await fetch(url);
         const text = await res.text();

@@ -38,7 +38,8 @@ function Childcare() {
         throw new Error('API 키가 설정되지 않았습니다.');
       }
 
-      const url = `/api/childcare/mediate/rest/cpmsapi021/cpmsapi021/request?key=${apiKey}&arcode=${selectedSigungu}`;
+      const path = `/mediate/rest/cpmsapi021/cpmsapi021/request?key=${apiKey}&arcode=${selectedSigungu}`;
+      const url = import.meta.env.DEV ? `/api/childcare${path}` : `https://asia-northeast3-publicmind-3e47b.cloudfunctions.net/proxyApi?url=${encodeURIComponent("http://api.childcare.go.kr" + path)}`;
       
       const response = await fetch(url);
       if (!response.ok) {

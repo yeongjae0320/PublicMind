@@ -262,10 +262,7 @@ function Parking() {
               <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#0c4a6e', margin: 0 }}>내 주변 빈 주차장 찾기</h3>
               <p style={{ fontSize: '0.85rem', color: '#0369a1', margin: 0 }}>현 위치 반경 3km 이내의 공영/민영 주차장</p>
             </div>
-            {/* Disclaimer Badge */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', background: 'rgba(14, 165, 233, 0.1)', color: '#0ea5e9', padding: '4px 8px', borderRadius: '8px', fontSize: '0.7rem', fontWeight: 700 }}>
-              <CheckCircle size={12} /> 서울시 실시간 API 연동됨
-            </div>
+
           </div>
         </div>
       </div>

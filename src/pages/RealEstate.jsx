@@ -127,8 +127,11 @@ function RealEstate() {
   const fetchRealData = async (lawdCd) => {
     try {
       const API_KEY = "7a3edd922501de268c179c92ad1a8dadba4c961d8bec81c71bf969280acf3d99";
-      const aptUrl = `/api/rtms/1613000/RTMSDataSvcAptTradeDev/getRTMSDataSvcAptTradeDev?serviceKey=${API_KEY}&LAWD_CD=${lawdCd}&DEAL_YMD=202312&numOfRows=10&pageNo=1`;
-      const villaUrl = `/api/rtms/1613000/RTMSDataSvcRHTrade/getRTMSDataSvcRHTrade?serviceKey=${API_KEY}&LAWD_CD=${lawdCd}&DEAL_YMD=202312&numOfRows=10&pageNo=1`;
+      const aptPath = `/1613000/RTMSDataSvcAptTradeDev/getRTMSDataSvcAptTradeDev?serviceKey=${API_KEY}&LAWD_CD=${lawdCd}&DEAL_YMD=202312&numOfRows=10&pageNo=1`;
+      const villaPath = `/1613000/RTMSDataSvcRHTrade/getRTMSDataSvcRHTrade?serviceKey=${API_KEY}&LAWD_CD=${lawdCd}&DEAL_YMD=202312&numOfRows=10&pageNo=1`;
+      
+      const aptUrl = import.meta.env.DEV ? `/api/rtms${aptPath}` : `https://asia-northeast3-publicmind-3e47b.cloudfunctions.net/proxyApi?url=${encodeURIComponent("https://apis.data.go.kr" + aptPath)}`;
+      const villaUrl = import.meta.env.DEV ? `/api/rtms${villaPath}` : `https://asia-northeast3-publicmind-3e47b.cloudfunctions.net/proxyApi?url=${encodeURIComponent("https://apis.data.go.kr" + villaPath)}`;
       
       const [aptRes, villaRes] = await Promise.all([
         fetch(aptUrl).catch(e => null),

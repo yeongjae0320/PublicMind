@@ -27,7 +27,9 @@ function EmbassyContacts() {
 
     try {
       // JSON 포맷으로 요청 (외교부 API)
-      const response = await fetch(`/api/travel/1262000/EmbassyService2/getEmbassyList2?serviceKey=${apiKey}&pageNo=1&numOfRows=300&returnType=JSON`);
+      const path = `/1262000/EmbassyService2/getEmbassyList2?serviceKey=${apiKey}&pageNo=1&numOfRows=300&returnType=JSON`;
+    const url = import.meta.env.DEV ? `/api/travel${path}` : `https://asia-northeast3-publicmind-3e47b.cloudfunctions.net/proxyApi?url=${encodeURIComponent("https://apis.data.go.kr" + path)}`;
+    const response = await fetch(url);
       
       if (!response.ok) {
         if (response.status === 403) {
