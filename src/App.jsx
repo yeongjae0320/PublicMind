@@ -38,11 +38,30 @@ import SportsReservation from './pages/SportsReservation';
 import HealthCheckup from './pages/HealthCheckup';
 
 import { AuthProvider } from './contexts/AuthContext';
+import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
+import { analytics } from './firebase';
+import { logEvent } from 'firebase/analytics';
+
+function PageTracker() {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (analytics) {
+      logEvent(analytics, 'page_view', {
+        page_path: location.pathname + location.search
+      });
+    }
+  }, [location]);
+
+  return null;
+}
 
 function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
+        <PageTracker />
         <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />

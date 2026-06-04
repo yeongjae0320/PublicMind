@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Search, MapPin, Shield, ShoppingCart, Train, Sparkles, Building, Map as MapIcon, X } from 'lucide-react';
 import { MOCK_NEIGHBORHOODS } from '../data/mockRealEstate';
 import AiInsightCard from '../components/AiInsightCard';
+import { analytics } from '../firebase';
+import { logEvent } from 'firebase/analytics';
 
 // Custom Kakao Map Component
 function KakaoMap({ results, onMarkerClick, selectedItem }) {
@@ -201,11 +203,18 @@ function RealEstate() {
     setIsSearching(true);
     setResults(null);
     
+    // Analytics tracking
+    if (analytics) {
+      logEvent(analytics, 'search_real_estate', {
+        region: formData.region,
+        priority: formData.priority1
+      });
+    }
+    
     const realApts = await fetchRealData(formData.region);
     
     setTimeout(() => {
-      let matched = [...MOCK_NEIGHBORHOODS];
-      matched.sort(() => Math.random() - 0.5); 
+      let matched = [...MOCK_NEIGHBORHOODS]; 
       
       const combined = [matched[0], ...realApts];
       setResults(combined);

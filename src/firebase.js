@@ -2,6 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getFunctions } from "firebase/functions";
+import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -25,5 +26,8 @@ export const db = getFirestore(app);
 
 // Initialize Firebase Functions
 export const functions = getFunctions(app);
+
+// Initialize Firebase Analytics
+export const analytics = typeof window !== 'undefined' ? getAnalytics(app) : null;
 
 export default app;
