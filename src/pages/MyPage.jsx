@@ -595,8 +595,8 @@ function MyPage() {
   };
 
   return (
-    <div className="fade-in mypage-section" style={{ padding: '40px 0', minHeight: 'calc(100vh - 160px)' }}>
-      <div className="mypage-grid" style={{ display: 'grid', gridTemplateColumns: '240px 1fr', gap: '40px', height: '100%', minHeight: '600px' }}>
+    <div className="fade-in mypage-section" style={{ minHeight: 'calc(100vh - 160px)' }}>
+      <div className="mypage-grid" style={{ display: 'grid', gridTemplateColumns: '240px 1fr', gap: '40px', height: '100%', minHeight: '600px', marginTop: '40px', marginBottom: '40px' }}>
         
         {/* Left Column: Title & Sidebar Tabs */}
         <div className="mypage-sidebar">
@@ -824,11 +824,11 @@ function MyPage() {
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
                       <div className="form-group">
                         <label className="form-label">이메일 계정 (수정 불가)</label>
-                        <input type="email" value={currentUser.email} disabled className="form-input" style={{ background: 'var(--bg-base)', color: 'var(--text-muted)' }} />
+                        <input type="email" value={currentUser.email} disabled className="form-input" style={{ padding: '12px 16px', borderRadius: '12px', background: 'var(--bg-base)', color: 'var(--text-muted)', border: '1px solid var(--border-light)', boxSizing: 'border-box' }} />
                       </div>
                       <div className="form-group">
                         <label className="form-label">이름 (닉네임)</label>
-                        <input type="text" value={displayName} onChange={e => setDisplayName(e.target.value)} className="form-input" placeholder="이름을 입력하세요" required />
+                        <input type="text" value={displayName} onChange={e => setDisplayName(e.target.value)} className="form-input" placeholder="이름을 입력하세요" required style={{ padding: '12px 16px', borderRadius: '12px', border: '1px solid var(--border-light)', boxSizing: 'border-box' }} />
                       </div>
                     </div>
                   </div>
@@ -924,7 +924,7 @@ function MyPage() {
                       value={deleteInput} 
                       onChange={e => { setDeleteInput(e.target.value); setDeleteError(''); }} 
                       className="form-input" 
-                      style={{ border: deleteError ? '1px solid var(--accent-red)' : '', width: '200px' }}
+                      style={{ padding: '12px 16px', borderRadius: '12px', border: deleteError ? '1px solid var(--accent-red)' : '1px solid var(--border-light)', width: '200px', boxSizing: 'border-box' }}
                     />
                     {deleteError && <p style={{ color: 'var(--accent-red)', fontSize: '0.8rem' }}>{deleteError}</p>}
                   </div>
@@ -932,7 +932,7 @@ function MyPage() {
                     onClick={handleDeleteAccount} 
                     disabled={deleteInput !== '계정 삭제'}
                     className="btn" 
-                    style={{ background: deleteInput === '계정 삭제' ? 'var(--accent-red)' : '#f87171', color: '#fff', opacity: deleteInput === '계정 삭제' ? 1 : 0.6, cursor: deleteInput === '계정 삭제' ? 'pointer' : 'not-allowed', whiteSpace: 'nowrap', flexShrink: 0, minWidth: 'max-content' }}
+                    style={{ padding: '12px 24px', background: deleteInput === '계정 삭제' ? 'var(--accent-red)' : '#f87171', color: '#fff', opacity: deleteInput === '계정 삭제' ? 1 : 0.6, cursor: deleteInput === '계정 삭제' ? 'pointer' : 'not-allowed', whiteSpace: 'nowrap', flexShrink: 0, minWidth: 'max-content', border: 'none', borderRadius: '12px', fontWeight: 600 }}
                   >
                     탈퇴하기
                   </button>
