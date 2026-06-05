@@ -400,6 +400,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   }
 }
 
+.mypage-section {
+  padding: 40px;
+  box-sizing: border-box;
+}
+
 @media (max-width: 768px) {
   .coverflow-wrapper {
     transform: scale(0.75);

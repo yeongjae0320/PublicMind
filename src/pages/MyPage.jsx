@@ -595,7 +595,7 @@ function MyPage() {
   };
 
   return (
-    <div className="fade-in mypage-section" style={{ minHeight: 'calc(100vh - 160px)' }}>
+    <div className="fade-in" style={{ minHeight: 'calc(100vh - 160px)' }}>
       <div className="mypage-grid" style={{ display: 'grid', gridTemplateColumns: '240px 1fr', gap: '40px', height: '100%', minHeight: '600px', marginTop: '40px', marginBottom: '40px' }}>
         
         {/* Left Column: Title & Sidebar Tabs */}
