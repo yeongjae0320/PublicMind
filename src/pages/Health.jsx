@@ -240,10 +240,10 @@ function Health() {
         </div>
       </div>
 
-      <div className="responsive-sidebar-layout" style={{ display: "flex", gap: "24px", flex: 1, minHeight: "600px" }}>
+      <div className="health-layout" style={{ display: "grid", gridTemplateColumns: "1fr 400px", gap: "32px", height: "calc(100vh - 200px)", minHeight: "600px" }}>
         
         {/* Left: Map Area */}
-        <div className="glass-panel responsive-content" style={{ position: "relative", overflow: "hidden", padding: 0, display: "flex", flexDirection: "column", border: "1px solid var(--border-light)" }}>
+        <div className="glass-panel" style={{ position: "relative", overflow: "hidden", padding: 0, display: "flex", flexDirection: "column", border: "1px solid var(--border-light)" }}>
           <KakaoMap 
             data={!loading ? data : []} 
             activeId={activeId} 
@@ -293,7 +293,7 @@ function Health() {
         </div>
 
         {/* Right: List Area */}
-        <div className="glass-panel responsive-sidebar" style={{ padding: 0, display: "flex", flexDirection: "column", overflow: "hidden" }}>
+        <div className="glass-panel health-sidebar" style={{ padding: 0, display: "flex", flexDirection: "column", overflow: "hidden" }}>
           <div style={{ padding: '24px', borderBottom: '1px solid var(--border-light)' }}>
             <h2 style={{ fontSize: '1.2rem', fontWeight: 800, margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}>
               검색 결과 <span className="badge badge-primary" style={{ background: activeTab === 'pharmacy' ? 'var(--primary-blue)' : (activeTab === 'hospital' ? '#059669' : '#e11d48'), color: 'white' }}>{filteredData.length}</span>

@@ -217,10 +217,10 @@ function SafetyMap() {
         </p>
       </div>
 
-      <div className="responsive-sidebar-layout" style={{ display: "flex", gap: "24px", minHeight: "700px", paddingBottom: "24px" }}>
+      <div className="safetymap-layout" style={{ display: "flex", gap: "32px", height: "calc(100vh - 200px)", minHeight: "600px" }}>
         
         {/* Left Sidebar - Filters & Results list */}
-        <div className="responsive-sidebar" style={{ flex: "0 0 340px", display: "flex", flexDirection: "column", gap: "16px", overflow: "hidden" }}>
+        <div className="safetymap-sidebar" style={{ width: "380px", display: "flex", flexDirection: "column", gap: "20px" }}>
           
           <div className="glass-panel" style={{ padding: '20px', borderRadius: '16px', flexShrink: 0 }}>
             <h3 style={{ fontSize: '1.1rem', fontWeight: 800, margin: '0 0 16px 0', color: 'var(--text-primary)' }}>지도 표시 필터</h3>

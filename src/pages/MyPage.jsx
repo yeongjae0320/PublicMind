@@ -596,10 +596,10 @@ function MyPage() {
 
   return (
     <div className="fade-in mypage-section" style={{ minHeight: 'calc(100vh - 160px)' }}>
-      <div className="responsive-sidebar-layout" style={{ display: 'flex', gap: '40px', height: '100%', minHeight: '600px' }}>
+      <div className="mypage-grid" style={{ display: 'grid', gridTemplateColumns: '240px 1fr', gap: '40px', height: '100%', minHeight: '600px' }}>
         
         {/* Left Column: Title & Sidebar Tabs */}
-        <div className="responsive-sidebar" style={{ width: '240px', flexShrink: 0 }}>
+        <div className="mypage-sidebar">
           <h1 className="page-title" style={{ marginBottom: '40px', fontSize: '2rem' }}>마이페이지</h1>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             <button 

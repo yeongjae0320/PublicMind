@@ -443,3 +443,32 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     position: static !important;
   }
 }
+
+
+@media (max-width: 768px) {
+  .mypage-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    height: auto !important;
+  }
+  .mypage-sidebar {
+    width: 100% !important;
+  }
+  .safetymap-layout {
+    flex-direction: column !important;
+    height: auto !important;
+  }
+  .safetymap-sidebar {
+    width: 100% !important;
+    flex: none !important;
+  }
+  .health-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    height: auto !important;
+  }
+  .health-sidebar {
+    width: 100% !important;
+    height: 500px !important;
+  }
+}
