@@ -408,7 +408,18 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 @media (max-width: 768px) {
   .coverflow-wrapper {
     transform: scale(0.75);
-    margin-bottom: -80px;
+    margin-bottom: -40px;
+  }
+  .bookmark-item {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+  }
+  .bookmark-item > div:last-child {
+    width: 100% !important;
+    justify-content: flex-end !important;
+    padding-top: 12px !important;
+    border-top: 1px solid var(--border-light) !important;
   }
   .community-post-item {
     padding: 16px 20px !important;

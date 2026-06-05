@@ -1178,7 +1178,7 @@ function MyPage() {
                       onDragEnter={(e) => handleDragEnter(e, index)}
                       onDragEnd={handleDragEnd}
                       onDragOver={handleDragOver}
-                      className="panel" 
+                      className="panel bookmark-item" 
                       style={{ 
                         display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px', 
                         background: bm.color || '#fff', border: '1px solid var(--border-light)', borderRadius: '16px',
