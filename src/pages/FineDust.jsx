@@ -82,7 +82,7 @@ function FineDust() {
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: '24px', gap: '24px' }}>
         {/* Skeleton UI */}
         <div className="skeleton-pulse" style={{ height: '200px', borderRadius: '24px' }}></div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '24px' }}>
           <div className="skeleton-pulse" style={{ height: '160px', borderRadius: '20px' }}></div>
           <div className="skeleton-pulse" style={{ height: '160px', borderRadius: '20px' }}></div>
           <div className="skeleton-pulse" style={{ height: '160px', borderRadius: '20px' }}></div>
@@ -121,7 +121,7 @@ function FineDust() {
         style={{ 
           background: mainGradient,
           color: 'white',
-          padding: '40px 32px',
+          padding: '24px',
           borderRadius: '32px',
           display: 'flex',
           flexDirection: 'column',
@@ -158,7 +158,7 @@ function FineDust() {
       </div>
 
       {/* Primary Pollutants Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '24px' }}>
         
         {/* PM10 Card */}
         <div className="glass-panel" style={{ padding: '24px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'white', borderRadius: '24px', border: '1px solid var(--border-light)', boxShadow: 'var(--shadow-md)' }}>

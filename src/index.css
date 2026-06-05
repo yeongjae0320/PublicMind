@@ -417,6 +417,12 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .community-tabs-wrapper {
     padding: 16px 20px 0 20px !important;
   }
+  .glass-panel {
+    padding: 24px !important;
+  }
+  .mypage-section {
+    padding: 24px !important;
+  }
   .community-post-item > div:last-child {
     flex-direction: row !important;
     align-items: center !important;

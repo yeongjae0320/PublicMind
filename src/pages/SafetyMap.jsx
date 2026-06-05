@@ -217,10 +217,10 @@ function SafetyMap() {
         </p>
       </div>
 
-      <div style={{ display: 'flex', gap: '24px', height: '700px', paddingBottom: '24px' }}>
+      <div className="responsive-sidebar-layout" style={{ display: "flex", gap: "24px", minHeight: "700px", paddingBottom: "24px" }}>
         
         {/* Left Sidebar - Filters & Results list */}
-        <div style={{ flex: '0 0 340px', display: 'flex', flexDirection: 'column', gap: '16px', overflow: 'hidden' }}>
+        <div className="responsive-sidebar" style={{ flex: "0 0 340px", display: "flex", flexDirection: "column", gap: "16px", overflow: "hidden" }}>
           
           <div className="glass-panel" style={{ padding: '20px', borderRadius: '16px', flexShrink: 0 }}>
             <h3 style={{ fontSize: '1.1rem', fontWeight: 800, margin: '0 0 16px 0', color: 'var(--text-primary)' }}>지도 표시 필터</h3>
@@ -330,7 +330,7 @@ function SafetyMap() {
         </div>
 
         {/* Right Map Area */}
-        <div style={{ flex: 1, position: 'relative', borderRadius: '20px', overflow: 'hidden', boxShadow: 'var(--shadow-md)', border: '1px solid var(--border-light)' }}>
+        <div className="responsive-content" style={{ flex: 1, position: "relative", borderRadius: "20px", overflow: "hidden", boxShadow: "var(--shadow-md)", border: "1px solid var(--border-light)" }}>
           <div ref={mapContainer} style={{ width: '100%', height: '100%' }}></div>
           
           {/* Floating Action Button for Location */}

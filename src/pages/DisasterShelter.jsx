@@ -235,12 +235,12 @@ function DisasterShelter() {
                   <div key={idx} onClick={() => panToShelter(shelter)} style={{ padding: '20px', borderRadius: '16px', background: 'linear-gradient(145deg, rgba(255,255,255,0.95), rgba(248,250,252,0.9))', border: '1px solid rgba(226, 232, 240, 0.6)', cursor: 'pointer', transition: 'all 0.2s', boxShadow: 'inset 0 1px 0 rgba(255,255,255,1), 0 2px 4px rgba(0,0,0,0.02)' }} onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 16px rgba(0,0,0,0.06)'; }} onMouseOut={(e) => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = 'inset 0 1px 0 rgba(255,255,255,1), 0 2px 4px rgba(0,0,0,0.02)'; }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '12px' }}>
                       <div style={{ flex: 1, minWidth: 0 }}>
-                        <h4 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '4px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                        <h4 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '4px', display: '-webkit-box', WebkitLineClamp: 1, WebkitBoxOrient: 'vertical', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                           {shelter.SHNT_PLACE_NM}
                         </h4>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '4px', color: 'var(--text-secondary)', fontSize: '0.8rem', marginBottom: '8px' }}>
                           <MapPin size={12} />
-                          <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{shelter.RN_DTL_ADRES || '주소 정보 없음'}</span>
+                          <span style={{ display: '-webkit-box', WebkitLineClamp: 1, WebkitBoxOrient: 'vertical', overflow: 'hidden', textOverflow: 'ellipsis' }}>{shelter.RN_DTL_ADRES || '주소 정보 없음'}</span>
                         </div>
                       </div>
                       <div style={{ padding: '4px 10px', background: 'var(--primary-blue)', color: 'white', fontSize: '0.75rem', fontWeight: 700, borderRadius: '8px', flexShrink: 0 }}>

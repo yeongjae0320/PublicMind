@@ -571,11 +571,11 @@ function MyPage() {
                     <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)' }}># {post.tag || post.category || '공통'}</span>
                   )}
                 </div>
-                <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '-0.01em', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '-0.01em', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden', textOverflow: 'ellipsis', wordBreak: 'break-all' }}>
                   {post.title}
                 </h3>
               </div>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '4px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '4px', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden', textOverflow: 'ellipsis', wordBreak: 'break-all' }}>
                 {post.content}
               </p>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 500 }}>
@@ -595,11 +595,11 @@ function MyPage() {
   };
 
   return (
-    <div className="fade-in" style={{ padding: '40px 0', minHeight: 'calc(100vh - 160px)' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '240px 1fr', gap: '40px', height: '100%', minHeight: '600px' }}>
+    <div className="fade-in mypage-section" style={{ minHeight: 'calc(100vh - 160px)' }}>
+      <div className="responsive-sidebar-layout" style={{ display: 'flex', gap: '40px', height: '100%', minHeight: '600px' }}>
         
         {/* Left Column: Title & Sidebar Tabs */}
-        <div>
+        <div className="responsive-sidebar" style={{ width: '240px', flexShrink: 0 }}>
           <h1 className="page-title" style={{ marginBottom: '40px', fontSize: '2rem' }}>마이페이지</h1>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             <button 
@@ -659,14 +659,14 @@ function MyPage() {
           
           {/* My Activity Tab */}
           {activeTab === 'activity' && (
-            <div className="fade-in" style={{ padding: '40px', maxWidth: '800px', margin: '0 auto', width: '100%' }}>
+            <div className="fade-in mypage-section" style={{ maxWidth: '800px', margin: '0 auto', width: '100%' }}>
               <MyActivityTab currentUser={currentUser} />
             </div>
           )}
 
           {/* Alerts Tab */}
           {activeTab === 'alerts' && (
-            <div className="fade-in" style={{ padding: '40px', display: 'flex', flexDirection: 'column', gap: '32px', maxWidth: '800px', margin: '0 auto', width: '100%' }}>
+            <div className="fade-in mypage-section" style={{ display: 'flex', flexDirection: 'column', gap: '32px', maxWidth: '800px', margin: '0 auto', width: '100%' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
                   <h2 style={{ fontSize: '1.5rem', fontWeight: 800, margin: '0 0 8px 0', color: 'var(--text-primary)' }}>나의 맞춤 알림</h2>
@@ -703,13 +703,13 @@ function MyPage() {
 
           {/* Family Management Tab */}
           {activeTab === 'family' && (
-            <div className="fade-in" style={{ padding: '40px', display: 'flex', flexDirection: 'column', gap: '40px', maxWidth: '800px', margin: '0 auto', width: '100%' }}>
+            <div className="fade-in mypage-section" style={{ display: 'flex', flexDirection: 'column', gap: '40px', maxWidth: '800px', margin: '0 auto', width: '100%' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
                   <h2 style={{ fontSize: '1.5rem', fontWeight: 800, margin: '0 0 8px 0', color: 'var(--text-primary)' }}>가족 통합 관리</h2>
                   <p style={{ color: 'var(--text-secondary)', margin: 0 }}>소중한 가족 구성원을 등록하고 맞춤 혜택을 통합해서 관리하세요.</p>
                 </div>
-                <button onClick={() => setShowAddFamily(!showAddFamily)} style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.9rem', color: 'white', background: 'var(--primary-blue)', padding: '10px 16px', borderRadius: '12px', fontWeight: 600, border: 'none', cursor: 'pointer' }}>
+                <button onClick={() => setShowAddFamily(!showAddFamily)} style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.9rem', color: 'white', background: 'var(--primary-blue)', padding: '10px 16px', borderRadius: '12px', fontWeight: 600, border: 'none', cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0 }}>
                   <Plus size={16} /> 구성원 추가
                 </button>
               </div>
@@ -812,7 +812,7 @@ function MyPage() {
 
           {/* Profile Tab */}
           {activeTab === 'profile' && (
-            <div className="fade-in" style={{ padding: '40px', display: 'flex', flexDirection: 'column', gap: '48px', maxWidth: '800px', margin: '0 auto', width: '100%' }}>
+            <div className="fade-in mypage-section" style={{ display: 'flex', flexDirection: 'column', gap: '48px', maxWidth: '800px', margin: '0 auto', width: '100%' }}>
               
               {/* Top Section: Profile Info & Conditions */}
               <section>
@@ -932,7 +932,7 @@ function MyPage() {
                     onClick={handleDeleteAccount} 
                     disabled={deleteInput !== '계정 삭제'}
                     className="btn" 
-                    style={{ background: deleteInput === '계정 삭제' ? 'var(--accent-red)' : '#f87171', color: '#fff', opacity: deleteInput === '계정 삭제' ? 1 : 0.6, cursor: deleteInput === '계정 삭제' ? 'pointer' : 'not-allowed' }}
+                    style={{ background: deleteInput === '계정 삭제' ? 'var(--accent-red)' : '#f87171', color: '#fff', opacity: deleteInput === '계정 삭제' ? 1 : 0.6, cursor: deleteInput === '계정 삭제' ? 'pointer' : 'not-allowed', whiteSpace: 'nowrap', flexShrink: 0, minWidth: 'max-content' }}
                   >
                     탈퇴하기
                   </button>
@@ -944,7 +944,7 @@ function MyPage() {
 
           {/* Conditions Tab */}
           {activeTab === 'conditions' && (
-            <div className="fade-in" style={{ padding: '40px', maxWidth: '800px', margin: '0 auto', width: '100%' }}>
+            <div className="fade-in mypage-section" style={{ maxWidth: '800px', margin: '0 auto', width: '100%' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
                 <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-primary)' }}>나의 맞춤 분석</h2>
                 <button 
@@ -1167,7 +1167,7 @@ function MyPage() {
                 <p style={{ textAlign: 'center' }}>앞으로 제공될 복지 정책, 맞춤 지원금, 병원 정보 등<br/>다양한 공공 정보를 탐색하고 스크랩해보세요!</p>
               </div>
             ) : (
-              <div className="fade-in" style={{ padding: '40px', display: 'flex', flexDirection: 'column', gap: '24px', maxWidth: '800px', margin: '0 auto', width: '100%' }}>
+              <div className="fade-in mypage-section" style={{ display: 'flex', flexDirection: 'column', gap: '24px', maxWidth: '800px', margin: '0 auto', width: '100%' }}>
                 <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '8px' }}>내 관심 스크랩</h2>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                   {bookmarks.map((bm, index) => (
@@ -1205,7 +1205,7 @@ function MyPage() {
                       </div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                         {bm.link && (
-                          <button className="btn" style={{ padding: '8px 16px', borderRadius: '8px', background: 'var(--bg-base)', border: '1px solid var(--border-light)', fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-secondary)' }} onClick={(e) => { e.stopPropagation(); window.open(bm.link, '_blank'); }}>
+                          <button className="btn" style={{ padding: '8px 16px', borderRadius: '8px', background: 'var(--bg-base)', border: '1px solid var(--border-light)', fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-secondary)', whiteSpace: 'nowrap', flexShrink: 0 }} onClick={(e) => { e.stopPropagation(); window.open(bm.link, '_blank'); }}>
                             상세보기
                           </button>
                         )}
@@ -1245,7 +1245,7 @@ function MyPage() {
 
           {/* Community Tab */}
           {activeTab === 'community' && (
-            <div className="fade-in" style={{ padding: '40px', display: 'flex', flexDirection: 'column', gap: '24px', maxWidth: '800px', margin: '0 auto', width: '100%' }}>
+            <div className="fade-in mypage-section" style={{ display: 'flex', flexDirection: 'column', gap: '24px', maxWidth: '800px', margin: '0 auto', width: '100%' }}>
               <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '8px' }}>커뮤니티 활동 내역</h2>
               <div style={{ borderBottom: '1px solid var(--border-light)' }}>
                 <div style={{ display: 'flex', gap: '16px' }}>

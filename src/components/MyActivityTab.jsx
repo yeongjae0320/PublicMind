@@ -405,7 +405,7 @@ function MyActivityTab({ currentUser }) {
                   onChange={(e) => setMemoText(e.target.value)}
                   placeholder="오늘 어떤 기능을 사용하셨나요? 피드백이나 일과를 남겨주세요."
                   style={{
-                    width: '100%', minHeight: '100px', padding: '16px', borderRadius: '12px',
+                    width: '100%', minHeight: '100px', padding: '16px', borderRadius: '12px', boxSizing: 'border-box',
                     border: '1px solid var(--border-light)', background: selectedColor,
                     fontSize: '0.95rem', color: 'var(--text-primary)', resize: 'none', outline: 'none',
                     fontFamily: 'inherit', transition: 'background 0.3s'
