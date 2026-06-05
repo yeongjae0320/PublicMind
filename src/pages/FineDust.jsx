@@ -135,7 +135,7 @@ function FineDust() {
           <Wind size={200} />
         </div>
         
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', position: 'relative', zIndex: 2 }}>
+        <div className="finedust-main-content" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', position: 'relative', zIndex: 2 }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', background: 'rgba(255,255,255,0.2)', padding: '6px 16px', borderRadius: '99px', width: 'fit-content', backdropFilter: 'blur(10px)' }}>
               <MapPin size={16} />
@@ -158,7 +158,7 @@ function FineDust() {
       </div>
 
       {/* Primary Pollutants Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '24px' }}>
+      <div className="finedust-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '24px' }}>
         
         {/* PM10 Card */}
         <div className="glass-panel" style={{ padding: '24px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'white', borderRadius: '24px', border: '1px solid var(--border-light)', boxShadow: 'var(--shadow-md)' }}>
@@ -224,7 +224,7 @@ function FineDust() {
       </div>
 
       {/* Secondary Pollutants */}
-      <div className="glass-panel" style={{ padding: '24px', background: 'white', borderRadius: '24px', border: '1px solid var(--border-light)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div className="glass-panel finedust-secondary-panel" style={{ padding: '24px', background: 'white', borderRadius: '24px', border: '1px solid var(--border-light)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', flex: 1, borderRight: '1px solid var(--border-light)', paddingRight: '24px' }}>
           <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 700 }}>이산화질소 (NO₂)</div>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
@@ -261,7 +261,7 @@ function FineDust() {
             {data.sidoName} 내 미세먼지(PM10) 현황 비교
           </div>
           
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px' }}>
+          <div className="finedust-regional-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px' }}>
             {/* Best Regions */}
             <div>
               <h4 style={{ fontSize: '0.9rem', color: '#10b981', fontWeight: 800, marginBottom: '16px' }}>가장 공기가 맑은 곳 (Top 3)</h4>

@@ -426,6 +426,40 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     transform: scale(0.75);
     margin-bottom: -40px;
   }
+  .finedust-main-content {
+    flex-direction: column !important;
+    gap: 16px !important;
+    align-items: flex-start !important;
+  }
+  .finedust-main-content > div:last-child {
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+  .finedust-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .finedust-secondary-panel {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+  }
+  .finedust-secondary-panel > div {
+    border-right: none !important;
+    border-bottom: 1px solid var(--border-light) !important;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+    padding-bottom: 16px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .finedust-secondary-panel > div:last-child {
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+  }
+  .finedust-regional-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
   .ai-insight-wrapper {
     width: calc(100% - 32px) !important;
     right: 16px !important;
