@@ -151,11 +151,11 @@ function Layout() {
           style={{ 
             background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', 
             borderRadius: '24px', padding: '12px 24px', boxShadow: 'var(--shadow-md)', border: '1px solid rgba(255,255,255,0.9)',
-            position: 'relative', overflowX: 'auto', scrollbarWidth: 'none'
+            position: 'relative'
           }}
           onMouseLeave={() => setIsMegaMenuOpen(false)}
         >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', flexWrap: 'wrap', gap: '12px' }}>
             {/* Left Section: Logo + Nav */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               {/* Logo */}

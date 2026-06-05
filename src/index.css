@@ -314,7 +314,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .hero-subtitle { font-size: 1rem !important; margin-bottom: 24px !important; }
   
   /* Coverflow Scaling for Mobile */
-  .coverflow-wrapper { height: 400px; transform: scale(0.85); transform-origin: top center; margin-bottom: -40px; }
+  .coverflow-wrapper { height: 500px; transform: scale(0.85); transform-origin: top center; margin-bottom: -40px; }
   
   /* Floating Header Mobile Adjustments */
   .header-container { padding: 16px !important; gap: 12px; border-radius: 16px !important; }
