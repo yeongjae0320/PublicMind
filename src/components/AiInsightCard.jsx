@@ -71,7 +71,7 @@ function AiInsightCard({ data, context, systemPrompt }) {
 
   if (!currentUser) {
     return (
-      <div style={{
+      <div className="ai-insight-panel" style={{
         background: 'rgba(255, 255, 255, 0.85)',
         backdropFilter: 'blur(16px)',
         border: '1px solid rgba(255, 255, 255, 1)',
@@ -114,7 +114,7 @@ function AiInsightCard({ data, context, systemPrompt }) {
   if (!insight && !loading) return null;
 
   return (
-    <div style={{
+    <div className="ai-insight-panel" style={{
       background: 'rgba(255, 255, 255, 0.85)',
       backdropFilter: 'blur(16px)',
       WebkitBackdropFilter: 'blur(16px)',
@@ -154,7 +154,7 @@ function AiInsightCard({ data, context, systemPrompt }) {
           <div className="ai-skeleton" style={{ height: '18px', width: '60%' }}></div>
         </div>
       ) : (
-        <div className="markdown-body custom-ai-list" style={{ fontSize: '0.95rem', color: 'var(--text-primary)', lineHeight: 1.6, animation: 'fadeIn 0.5s ease' }}>
+        <div className="markdown-body custom-ai-list ai-insight-content" style={{ fontSize: '0.95rem', color: 'var(--text-primary)', lineHeight: 1.6, animation: 'fadeIn 0.5s ease' }}>
           <style>{`
             .custom-ai-list ul {
               list-style-type: none;

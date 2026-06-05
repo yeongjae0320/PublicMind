@@ -281,7 +281,7 @@ function TravelSafety() {
         </div>
 
         {/* AI Insight Card Overlay */}
-        <div style={{ position: 'absolute', top: '80px', right: '20px', width: '380px', zIndex: 1000 }}>
+        <div className="ai-insight-wrapper" style={{ position: "absolute", top: "80px", right: "20px", width: "380px", zIndex: 1000 }}>
           <AiInsightCard 
             data={displayAlerts.map(a => ({ 
               국명: a.location, 

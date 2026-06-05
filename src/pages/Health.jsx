@@ -252,7 +252,7 @@ function Health() {
             userLocation={userLocation}
           />
           
-          <div style={{ position: 'absolute', bottom: '24px', right: '24px', width: '380px', zIndex: 10 }}>
+          <div className="ai-insight-wrapper" style={{ position: "absolute", bottom: "24px", right: "24px", width: "380px", zIndex: 10 }}>
             <AiInsightCard 
               data={!loading ? data : []} 
               context={activeTab === 'pharmacy' ? '실시간 약국' : (activeTab === 'hospital' ? '동네 병·의원' : '응급의료기관')} 

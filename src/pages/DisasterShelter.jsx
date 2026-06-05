@@ -282,7 +282,7 @@ function DisasterShelter() {
           <div ref={mapRef} style={{ width: '100%', height: '100%' }}></div>
           
           {/* AI Insight Card Overlay */}
-          <div style={{ position: 'absolute', bottom: '24px', right: '24px', width: '380px', zIndex: 10 }}>
+          <div className="ai-insight-wrapper" style={{ position: "absolute", bottom: "24px", right: "24px", width: "380px", zIndex: 10 }}>
             <AiInsightCard 
               data={shelters.map(s => ({
                 이름: s.SHNT_PLACE_NM,

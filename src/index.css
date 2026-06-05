@@ -405,10 +405,37 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   box-sizing: border-box;
 }
 
+.ai-insight-content {
+  max-height: 250px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+.ai-insight-content::-webkit-scrollbar {
+  width: 6px;
+}
+.ai-insight-content::-webkit-scrollbar-thumb {
+  background-color: var(--border-medium);
+  border-radius: 10px;
+}
+.ai-insight-content::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
 @media (max-width: 768px) {
   .coverflow-wrapper {
     transform: scale(0.75);
     margin-bottom: -40px;
+  }
+  .ai-insight-wrapper {
+    width: calc(100% - 32px) !important;
+    right: 16px !important;
+    left: 16px !important;
+  }
+  .ai-insight-panel {
+    padding: 16px !important;
+  }
+  .ai-insight-content {
+    max-height: 200px !important;
   }
   .bookmark-item {
     flex-direction: column !important;

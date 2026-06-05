@@ -343,7 +343,7 @@ function RealEstate() {
         <div className="glass-panel" style={{ flex: 1, padding: 0, overflow: 'hidden', position: 'relative', border: '1px solid rgba(226, 232, 240, 0.8)', borderRadius: '24px' }}>
           <KakaoMap results={results} onMarkerClick={setSelectedRealEstate} selectedItem={selectedRealEstate} />
           {results && (
-            <div style={{ position: 'absolute', bottom: '24px', right: '24px', width: '380px', zIndex: 10 }}>
+            <div className="ai-insight-wrapper" style={{ position: "absolute", bottom: "24px", right: "24px", width: "380px", zIndex: 10 }}>
               <AiInsightCard data={results} context="부동산 매물 및 입지" />
             </div>
           )}
