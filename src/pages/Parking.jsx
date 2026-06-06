@@ -313,11 +313,11 @@ function Parking() {
                     justifyContent: 'space-between'
                   }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1, minWidth: 0 }}>
                     <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: isSelected ? '#0ea5e9' : '#f0f9ff', display: 'flex', alignItems: 'center', justifyContent: 'center', color: isSelected ? 'white' : '#0ea5e9', flexShrink: 0 }}>
                       <span style={{ fontWeight: 900, fontSize: '1.1rem' }}>P</span>
                     </div>
-                    <div style={{ minWidth: 0 }}>
+                    <div style={{ minWidth: 0, flex: 1 }}>
                       <h5 style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '4px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                         {lot.place_name}
                       </h5>
